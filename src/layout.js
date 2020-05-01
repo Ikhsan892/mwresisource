@@ -3,10 +3,13 @@ import Navigation from './components/Navigation'
 import Hidden from '@material-ui/core/Hidden';
 import NavigationBottom from './components/NavigationBottom'
 import Footer from './components/Footer'
-const Layout = ({children}) => {
+import { makeStyles } from '@material-ui/core/styles';
+const Layout = ({children, toggle}) => {
   return(
     <div>
-      <Navigation/>
+      <Navigation>
+        {toggle}
+      </Navigation>
         {children}
       <Footer/>
       <Hidden mdUp>

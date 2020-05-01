@@ -26,9 +26,12 @@ const NavigationBottom = () => {
       }}
       showLabels
       className={classes.root}
+      color="primary"
     >
-      <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-      <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+      <BottomNavigationAction label="Home" icon={<RestoreIcon />} />
+      <BottomNavigationAction label="Invoice" icon={<FavoriteIcon />} />
+      <BottomNavigationAction label="About" icon={<LocationOnIcon />} />
+      <BottomNavigationAction label="" icon={<LocationOnIcon />} />
       <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
     </BottomNavigation>
   );

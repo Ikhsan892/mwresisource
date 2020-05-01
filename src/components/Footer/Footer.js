@@ -15,7 +15,7 @@ const Footer = () => {
           <div className="footer-top">
               <div className="row">
                   <div className="col-md-6 col-lg-3 about-footer">
-                      <h3>Makersware Service Track</h3>
+                      <h3>Makersware Service</h3>
                       <ul>
                           <li><a target='__blank' href="https://wa.me/6288976972688"><i><WhatsAppIcon/></i>088976972688</a></li>
                           <li><i><RoomIcon/></i>
@@ -24,7 +24,7 @@ const Footer = () => {
                               <br/>Jawa Barat 17115
                           </li>
                       </ul>
-                      <a target='__blank' href="https://wa.me/6288976972688" className="btn red-btn">Pengen Service ?</a>
+                      <a target='__blank' href="https://wa.me/6288976972688" className="btn red-btn">Ingin Service ?</a>
                   </div>
                   <div className="col-md-6 col-lg-2 page-more-info">
                       <div className="footer-title">
@@ -75,7 +75,8 @@ const Footer = () => {
                       </table>
                       <hr/>
                       <div className="footer-logo">
-
+                      <h4>Metode Pembayaran</h4>
+                      <br/>
                       <table>
                           <tbody>
                               <tr>

@@ -13,6 +13,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  sectionDesktop: {
+   display: 'none',
+   [theme.breakpoints.up('md')]: {
+     display: 'flex',
+   },
+ },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -21,17 +27,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navigation = () => {
+const Navigation = ({children}) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="primary">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Makersware Service Track
           </Typography>
-          <Button color="inherit">Login</Button>
+          {children}
         </Toolbar>
       </AppBar>
     </div>
