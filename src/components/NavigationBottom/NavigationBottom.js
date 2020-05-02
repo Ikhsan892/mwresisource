@@ -2,9 +2,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+import HomeIcon from '@material-ui/icons/Home';
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import InfoIcon from '@material-ui/icons/Info';
 
 const useStyles = makeStyles(theme =>({
   root: {
@@ -28,11 +28,9 @@ const NavigationBottom = () => {
       className={classes.root}
       color="primary"
     >
-      <BottomNavigationAction label="Home" icon={<RestoreIcon />} />
-      <BottomNavigationAction label="Invoice" icon={<FavoriteIcon />} />
-      <BottomNavigationAction label="About" icon={<LocationOnIcon />} />
-      <BottomNavigationAction label="" icon={<LocationOnIcon />} />
-      <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+      <BottomNavigationAction label="Home" icon={<HomeIcon />} />
+      <BottomNavigationAction label="Invoice" icon={<ReceiptIcon />} />
+      <BottomNavigationAction label="About" icon={<InfoIcon />} />
     </BottomNavigation>
   );
 }

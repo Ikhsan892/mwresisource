@@ -11,8 +11,9 @@ import {ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Home from './pages/Home'
+import Invoice from './pages/Invoice'
 function App() {
-  const [dark, setDark] = useState(true)
+  const [dark, setDark] = useState(false)
   const [storage, setStorage] = useState()
   const mainTheme = createMuiTheme({
     palette : {
@@ -28,9 +29,9 @@ function App() {
     <React.Fragment>
         <ThemeProvider theme={mainTheme}>
           <CssBaseline/>
-            <Layout toggle={<DarkToggle klik={toggle} check={dark}/>}>
+            <Layout toggle={<DarkToggle check={dark} click={toggle}/>}>
               <Container>
-                <Home/>
+                <Invoice/>
               </Container>
             </Layout>
         </ThemeProvider>

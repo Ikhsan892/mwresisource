@@ -1,22 +1,16 @@
 import React from 'react'
-import './DarkToggle.css'
-const DarkToggle = ({klik, check}) => {
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
+import Brightness3Icon from '@material-ui/icons/Brightness3';
+const DarkToggle = ({check, click}) => {
   return(
-    <div class="toggleWrapper">
-      <input type="checkbox" checked={check} class="dn" id="dn" onChange={klik}/>
-      <label for="dn" class="toggle">
-        <span class="toggle__handler">
-          <span class="crater crater--1"></span>
-          <span class="crater crater--2"></span>
-          <span class="crater crater--3"></span>
-        </span>
-        <span class="star star--1"></span>
-        <span class="star star--2"></span>
-        <span class="star star--3"></span>
-        <span class="star star--4"></span>
-        <span class="star star--5"></span>
-        <span class="star star--6"></span>
-      </label>
+    <div>
+    <Tooltip title = "dark mode">
+      <IconButton aria-label="darktheme" onClick={click} color="inherit">
+        {check ? <Brightness3Icon/> : <Brightness7Icon/>}
+      </IconButton>
+    </Tooltip>
     </div>
   )
 }
