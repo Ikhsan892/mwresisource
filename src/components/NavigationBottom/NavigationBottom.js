@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/Home';
+import { withRouter, Link } from "react-router-dom";
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import InfoIcon from '@material-ui/icons/Info';
 
@@ -18,21 +19,22 @@ const NavigationBottom = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
+  const handleRoute = (event,newValue) => {
+    setValue(newValue);
+  }
   return (
     <BottomNavigation
       value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
-      }}
+      onChange={handleRoute}
       showLabels
       className={classes.root}
       color="primary"
     >
-      <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-      <BottomNavigationAction label="Invoice" icon={<ReceiptIcon />} />
-      <BottomNavigationAction label="About" icon={<InfoIcon />} />
+      <BottomNavigationAction label="Home" component={Link} to="/" icon={<HomeIcon />} />
+      <BottomNavigationAction label="Invoice" component={Link} to="/invoice" icon={<ReceiptIcon />} />
+      <BottomNavigationAction label="Informasi" icon={<InfoIcon />} />
     </BottomNavigation>
   );
 }
 
-export default NavigationBottom
+export default withRouter(NavigationBottom)

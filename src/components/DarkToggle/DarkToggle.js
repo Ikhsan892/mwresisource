@@ -8,7 +8,7 @@ const DarkToggle = ({check, click}) => {
     <div>
     <Tooltip title = "dark mode">
       <IconButton aria-label="darktheme" onClick={click} color="inherit">
-        {check ? <Brightness3Icon/> : <Brightness7Icon/>}
+        {check ? <Brightness7Icon/> : <Brightness3Icon/> }
       </IconButton>
     </Tooltip>
     </div>

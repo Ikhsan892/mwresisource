@@ -39,10 +39,10 @@ const Invoice = () => {
     <div>
       <img src = {InvoiceImg} alt="Invoice" className={classes.image2}/>
       <Hidden smDown>
-        <h2 className={classes.h2}>Cari Tagihan Pembayaranmu Yang Di Invoice Disini</h2>
+        <h2 className={classes.h2}>Cari Invoice mu Disini</h2>
       </Hidden>
       <Hidden mdUp>
-        <h4 className={classes.h2}>Cari Tagihan Pembayaranmu Yang Di Invoice Disini</h4>
+        <h4 className={classes.h2}>Cari Invoice mu Disini</h4>
       </Hidden>
       <hr/>
       <TextField color="inherit" id="outlined-basic" label="Masukkan Nomor Resi" variant="outlined" fullWidth/>

@@ -4,10 +4,7 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,14 +25,13 @@ const useStyles = makeStyles((theme) => ({
 function getSteps() {
   return ['Membongkar HP', 'Penggantian Lcd', 'Ganti Konektor', 'Pemasangan Lcd'].reverse();
 }
-function getcontent(index){
+function getcontent(){
   return ['Membuka dalaman hp dengan hati hati', 'Menggan Lcd membutuhkan waktu 4 jam','ganti konektor mantap','masang lcd dan di lem '].reverse()
 }
 
-
 export default function Progress() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep] = React.useState(0);
   const steps = getSteps();
 
   return (

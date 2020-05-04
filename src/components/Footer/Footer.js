@@ -3,7 +3,14 @@ import './bootstrap.min.css'
 import './Footer.css'
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import RoomIcon from '@material-ui/icons/Room';
+import {Link} from 'react-router-dom'
 import FacebookIcon from '@material-ui/icons/Facebook';
+import dana from './dana.png'
+import ovo from './ovo.png'
+import indomaret from './indomaret.png'
+import alfamart from './alfamart.png'
+import bca from './bca.png'
+import btn from './btn.png'
 import InstagramIcon from '@material-ui/icons/Instagram';
 import EmailIcon from '@material-ui/icons/Email';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
@@ -33,15 +40,15 @@ const Footer = () => {
                           <h4>Halaman</h4>
                       </div>
                       <ul>
-                          <li><a href="#">Home</a></li>
-                          <li><a href="#">Invoice</a></li>
-                          <li><a href="#">About</a></li>
+                          <li><Link to="/">Home</Link></li>
+                          <li><Link to="/invoice">Invoice</Link></li>
+                          <li><Link to="/informasi">Informasi</Link></li>
                       </ul>
                   </div>
 
                   <div className="col-md-6 col-lg-3 page-more-info">
                       <div className="footer-title">
-                          <h4>Info Tambahan</h4>
+                          <h4>Informasi</h4>
                       </div>
                       <ul>
                           <li><a href="https://api.whatsapp.com/send?phone=6289631996733&text=Bagaimana%20Mengajukan%20Klaim%20Garansi?">Klaim Garansi</a></li>
@@ -53,9 +60,9 @@ const Footer = () => {
                       <div className="footer-title">
                           <h4>Jam Pelayanan</h4>
                           <ul className="footer-social">
-                              <li><a href="" target="_blank"><i><FacebookIcon/></i></a></li>
-                              <li><a href="" target="_blank"><i><InstagramIcon/></i></a></li>
-                              <li><a href="mailto:admin@makersware.web.id" target="_blank"><i><EmailIcon/></i></a></li>
+                              <li><a href="https://facebook.com" target="__blank"><i><FacebookIcon/></i></a></li>
+                              <li><a href="https://instagram.com" target="__blank"><i><InstagramIcon/></i></a></li>
+                              <li><a href="mailto:admin@makersware.web.id" target="__blank"><i><EmailIcon/></i></a></li>
                           </ul>
                       </div>
                       <table className="table">
@@ -81,11 +88,12 @@ const Footer = () => {
                       <table>
                           <tbody>
                               <tr>
-                                  <td><img src="https://i.ibb.co/vxc577d/dummy-logo3.jpg" alt="166x84"/></td>
-                                  <td><img src="https://i.ibb.co/vxc577d/dummy-logo3.jpg"/></td>
-                                  <td><img src="https://i.ibb.co/vxc577d/dummy-logo3.jpg"/></td>
-                                  <td><img src="https://i.ibb.co/vxc577d/dummy-logo3.jpg"/></td>
-                                  <td><img src="https://i.ibb.co/vxc577d/dummy-logo3.jpg"/></td>
+                                  <td><img src={dana} alt="dana"/></td>
+                                  <td><img src={ovo} alt="ovo"/></td>
+                                  <td><img src={indomaret} alt="indomaret"/></td>
+                                  <td><img src={alfamart} alt="alfamart"/></td>
+                                  <td><img src={bca} alt="bca"/></td>
+                                  <td><img src={btn} alt="btn"/></td>
                               </tr>
                           </tbody>
                       </table>
