@@ -1,6 +1,5 @@
 import React from 'react'
-import Hidden from '@material-ui/core/Hidden';
-import NodataImage from '../../assets/nodata.svg'
+import { Hidden } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +22,7 @@ const Nodata = () => {
   const classes = useStyles()
   return(
     <div>
-      <img src = {NodataImage} alt="no responses" className={classes.image}/>
+      <img src = "/assets/nodata.svg" alt="no responses" className={classes.image}/>
       <Hidden smDown>
         <h2 className={classes.h2}>Data Kosong</h2>
       </Hidden>

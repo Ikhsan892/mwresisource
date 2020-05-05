@@ -1,17 +1,17 @@
 import React from 'react'
-// import Navigation from '../../components/Navigation'
-// import SwipeableButton from '../../components/SwipeableButton'
 import { makeStyles } from '@material-ui/core/styles';
-import TrackImage from '../assets/track.svg'
-import Hidden from '@material-ui/core/Hidden';
-import Card from '@material-ui/core/Card';
-import HeaderStepper from './components/headerstepper'
-import Grid from '@material-ui/core/Grid';
-import Progress from './components/progress'
-import Typography from '@material-ui/core/Typography';
-import CardContent from '@material-ui/core/CardContent';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import {
+  Card,
+  Grid,
+  Typography,
+  CardContent,
+  TextField,
+  Button,
+  Hidden
+} from '@material-ui/core';
+import { HeaderStepper, Progress} from './components'
 const useStyles = makeStyles((theme) => ({
   h2: {
     textAlign : 'center'
@@ -57,7 +57,7 @@ const Home = () => {
   const classes = useStyles()
   return(
     <div>
-      <img src = {TrackImage} alt="Track" className={classes.image}/>
+      <LazyLoadImage src = "/assets/track.svg" alt="Track" className={classes.image}/>
       <Hidden smDown>
         <h2 className={classes.h2}>Lacak Perkembangan Barangmu dengan Mudah</h2>
       </Hidden>

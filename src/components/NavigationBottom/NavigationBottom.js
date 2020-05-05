@@ -1,11 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import HomeIcon from '@material-ui/icons/Home';
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+} from '@material-ui/core';
 import { withRouter, Link } from "react-router-dom";
-import ReceiptIcon from '@material-ui/icons/Receipt';
-import InfoIcon from '@material-ui/icons/Info';
+import {
+  Receipt,
+  Info,
+  Home
+} from '@material-ui/icons';
 
 const useStyles = makeStyles(theme =>({
   root: {
@@ -30,9 +34,9 @@ const NavigationBottom = () => {
       className={classes.root}
       color="primary"
     >
-      <BottomNavigationAction label="Home" component={Link} to="/" icon={<HomeIcon />} />
-      <BottomNavigationAction label="Invoice" component={Link} to="/invoice" icon={<ReceiptIcon />} />
-      <BottomNavigationAction label="Informasi" icon={<InfoIcon />} />
+      <BottomNavigationAction label="Home" component={Link} to="/" icon={<Home />} />
+      <BottomNavigationAction label="Invoice" component={Link} to="/invoice" icon={<Receipt />} />
+      <BottomNavigationAction label="Informasi" icon={<Info />} />
     </BottomNavigation>
   );
 }

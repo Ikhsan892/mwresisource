@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import StepLabel from '@material-ui/core/StepLabel';
+import {
+  Stepper,
+  Step,
+  SvgIcon,
+  StepLabel,
+  StepConnector
+} from '@material-ui/core';
 import Check from '@material-ui/icons/Check';
-import StepConnector from '@material-ui/core/StepConnector';
 
 const useQontoStepIconStyles = makeStyles({
   root: {
@@ -203,7 +205,7 @@ function getSteps() {
   return ['Diservice', 'Dipacking', 'Dikirim', 'Diterima'];
 }
 
-export default function CustomizedSteppers() {
+const HeaderStepper = () =>  {
   const classes = useStyles();
   const [activeStep] = React.useState(1);
   const steps = getSteps();
@@ -230,3 +232,5 @@ export default function CustomizedSteppers() {
     </div>
   );
 }
+
+export default HeaderStepper

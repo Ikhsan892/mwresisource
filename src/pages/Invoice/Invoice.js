@@ -1,17 +1,22 @@
-import React from 'react'
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import InvoiceImg from '../assets/invoice.svg'
-import Hidden from '@material-ui/core/Hidden';
+import React,{useEffect} from 'react'
+import {
+  TextField,
+  Button,
+  Hidden
+} from '@material-ui/core';
+import { useLocation } from 'react-router-dom'
+import Result from './components/result'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+// import 'react-lazy-load-image-component/src/effects/black-and-white.css';
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
-  image2 : {
+  image : {
+    display : 'block',
     marginTop : '5px',
+    marginRight: 'auto',
+    marginLeft : 'auto',
     width : '400px',
     height : '400px',
-    display : 'block',
-    marginLeft: 'auto',
-    marginRight: 'auto',
     [theme.breakpoints.down('sm')] : {
       width : '200px',
       height : '200px',
@@ -35,21 +40,34 @@ const useStyles = makeStyles((theme) => ({
 
 const Invoice = () => {
   const classes = useStyles()
+  const [value, setValue] = React.useState('')
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+  let query = useQuery()
+
+  useEffect(() => {
+    if(query.get('resi')){
+      setValue(query.get('resi'))
+    }
+  },[value])
   return(
     <div>
-      <img src = {InvoiceImg} alt="Invoice" className={classes.image2}/>
+      <LazyLoadImage src = "/assets/invoice.svg" alt="Invoice" className={classes.image}/>
       <Hidden smDown>
-        <h2 className={classes.h2}>Cari Invoice mu Disini</h2>
+        <h2 className={classes.h2}>Cari Tagihan mu Disini</h2>
       </Hidden>
       <Hidden mdUp>
-        <h4 className={classes.h2}>Cari Invoice mu Disini</h4>
+        <h4 className={classes.h2}>Cari Tagihan mu Disini</h4>
       </Hidden>
       <hr/>
-      <TextField color="inherit" id="outlined-basic" label="Masukkan Nomor Resi" variant="outlined" fullWidth/>
+      <TextField color="inherit" id="outlined-basic" label="Masukkan Nomor Resi" variant="outlined" fullWidth value={value}/>
       <br/>
       <Button variant="contained" color="primary" className={classes.button}>
-        CEK RESI
+        CEK INVOICE
       </Button>
+      <br/>
+      <Result/>
     </div>
   )
 }
