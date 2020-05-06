@@ -40,7 +40,7 @@ const Navigation = ({children}) => {
           <Hidden smDown>
             <Button color="inherit" component={Link} to="/">Home</Button>
             <Button color="inherit" component={Link} to="/invoice">Invoice</Button>
-            <Button color="inherit">Informasi</Button>
+            <Button color="inherit" component={Link} to="/information">Informasi</Button>
           </Hidden>
           {children}
         </Toolbar>

@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   },
   kop : {
     width : 'auto',
-    height : '70px',
+    height : '200px',
     [theme.breakpoints.down('sm')] :{
       width : '150px',
       height : 'auto'
@@ -52,7 +52,7 @@ const Result = () => {
         justify="space-between"
       >
         <Grid item>
-          <LazyLoadImage src="/assets/mwlogo.png" alt="logo makersware" effect="blur" className={classes.kop}/>
+          <LazyLoadImage src="/assets/mwlogo2.png" alt="logo makersware" effect="blur" className={classes.kop}/>
         </Grid>
         <Grid item>
           <Typography
@@ -213,7 +213,7 @@ const Result = () => {
             <TableCell />
             <TableCell>Total</TableCell>
             <TableCell align="right">
-              Rp 500.000,-
+              <strong>Rp 500.000,-</strong>
             </TableCell>
           </TableRow>
         </TableBody>

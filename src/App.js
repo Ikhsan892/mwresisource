@@ -6,11 +6,17 @@ import Blue from '@material-ui/core/colors/blue'
 import DarkToggle from './components/DarkToggle'
 import Layout from './layout'
 import {ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
-import Home from './pages/Home'
+import {
+  CssBaseline,
+  Container
+} from '@material-ui/core';
+import {
+  Home,
+  Invoice,
+  Information,
+  Error
+} from './pages'
 import {BrowserRouter as Router,Switch,Route } from "react-router-dom";
-import Invoice from './pages/Invoice'
 function App() {
   const [dark, setDark] = useState(JSON.parse(localStorage.getItem('dark')))
   const mainTheme = createMuiTheme({
@@ -38,6 +44,12 @@ function App() {
                           </Route>
                           <Route path="/invoice">
                             <Invoice/>
+                          </Route>
+                          <Route path="/information">
+                            <Information/>
+                          </Route>
+                          <Route path="*">
+                            <Error/>
                           </Route>
                         </Switch>
                   </Container>

@@ -36,7 +36,7 @@ const NavigationBottom = () => {
     >
       <BottomNavigationAction label="Home" component={Link} to="/" icon={<Home />} />
       <BottomNavigationAction label="Invoice" component={Link} to="/invoice" icon={<Receipt />} />
-      <BottomNavigationAction label="Informasi" icon={<Info />} />
+      <BottomNavigationAction label="Informasi" component={Link} to="/information" icon={<Info />} />
     </BottomNavigation>
   );
 }
