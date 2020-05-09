@@ -1,17 +1,17 @@
-import React from 'react'
+import React, {lazy, Suspense} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import {
   Card,
   Grid,
-  Typography,
   CardContent,
+  LinearProgress,
   TextField,
   Button,
   Hidden
 } from '@material-ui/core';
-import { HeaderStepper, Progress} from './components'
+const Result = lazy(() => import('./components/result'))
 const useStyles = makeStyles((theme) => ({
   h2: {
     textAlign : 'center'
@@ -57,7 +57,7 @@ const Home = () => {
   const classes = useStyles()
   return(
     <div>
-      <LazyLoadImage src = "/assets/track.svg" alt="Track" className={classes.image}/>
+      <LazyLoadImage src ="/assets/track.svg" alt="Track" className={classes.image}/>
       <Hidden smDown>
         <h2 className={classes.h2}>Lacak Perkembangan Barangmu dengan Mudah</h2>
       </Hidden>
@@ -65,11 +65,16 @@ const Home = () => {
         <h4 className={classes.h2}>Lacak Perkembangan Barangmu dengan Mudah</h4>
       </Hidden>
       <hr/>
-      <TextField color="primary" id="outlined-basic" label="Masukkan Nomor Resi" variant="outlined" fullWidth/>
-      <br/>
-      <Button variant="contained" color="primary" className={classes.button}>
-        CEK RESI
-      </Button>
+      <form onSubmit={(e) => {
+        e.preventDefault()
+        alert('submit')
+      }} autoComplete ="off">
+        <TextField id="outlined-basic" style={{boxSizing:'content-box'}}label="Masukkan Nomor Resi" variant="outlined" fullWidth/>
+        <br/>
+        <Button variant="contained" color="primary" className={classes.button}>
+          CEK RESI
+        </Button>
+      </form>
       <br/>
       <Grid
         container
@@ -78,111 +83,9 @@ const Home = () => {
         <Grid item xs={12} sm={9} md={9} lg={9}>
           <Card elevation={3}>
             <CardContent>
-              <Grid container>
-                <Grid item xs={12} className={classes.headline}>
-                  <HeaderStepper/>
-                  <Hidden smDown>
-                    <Typography variant="h4" gutterbottom="true">
-                      <strong>No Resi : </strong><span>MW21023</span>
-                    </Typography>
-                  </Hidden>
-                  <Hidden mdUp>
-                    <Typography variant="h5" gutterbottom="true">
-                      <strong>No Resi : </strong><span>MW2312424535454345</span>
-                    </Typography>
-                  </Hidden>
-                </Grid>
-                <hr/>
-                  <Grid item xs={6} className={classes.grid}>
-                    <Hidden smDown>
-                      <Typography variant="h6" gutterbottom="true">
-                        <strong>Nama : </strong><span>Muhammad Fatihul Ikhsan</span>
-                      </Typography>
-                    </Hidden>
-                    <Hidden mdUp>
-                      <Typography variant="body1" gutterbottom="true">
-                        <strong>Nama : </strong><span>Muhammad Fatihul Ikhsan</span>
-                      </Typography>
-                    </Hidden>
-                  </Grid>
-                  <Grid item xs={6} className={classes.grid}>
-                    <Hidden smDown>
-                      <Typography variant="h6" gutterbottom="true">
-                        <strong>Tanggal Masuk : </strong><span>Rabu, 14 April 2020</span>
-                      </Typography>
-                    </Hidden>
-                    <Hidden mdUp>
-                      <Typography variant="body1" gutterbottom="true">
-                        <strong>Tanggal Masuk : </strong><span>Rabu, 14 April 2020</span>
-                      </Typography>
-                    </Hidden>
-                  </Grid>
-                  <Grid item xs={6} className={classes.grid}>
-                    <Hidden smDown>
-                      <Typography variant="h6" gutterbottom="true">
-                        <strong>Barang : </strong><span>Xiaomi Redmi 5A</span>
-                      </Typography>
-                    </Hidden>
-                    <Hidden mdUp>
-                      <Typography variant="body1" gutterbottom="true">
-                        <strong>Barang : </strong><span>Xiaomi Redmi 5A</span>
-                      </Typography>
-                    </Hidden>
-                  </Grid>
-                  <Grid item xs={6} className={classes.grid}>
-                    <Hidden smDown>
-                      <Typography variant="h6" gutterbottom="true">
-                        <strong>Layanan : </strong><span>Reguler Service</span>
-                      </Typography>
-                    </Hidden>
-                    <Hidden mdUp>
-                      <Typography variant="body1" gutterbottom="true">
-                        <strong>Layanan : </strong><span>Reguler Service</span>
-                      </Typography>
-                    </Hidden>
-                  </Grid>
-                  <Grid item xs={12} className={classes.grid2}>
-                    <Hidden smDown>
-                      <Typography variant="h6" gutterbottom="true">
-                        <strong>Kerusakan : </strong>
-                          <ol>
-                            <li>Ganti Lcd Original Samsung 2017</li>
-                            <li>Ganti Oli</li>
-                            <li>Buka Pola Terkunci</li>
-                            <li>Ganti Speaker</li>
-                            <li>Ganti Fleksibel</li>
-                          </ol>
-                      </Typography>
-                    </Hidden>
-                    <Hidden mdUp>
-                      <Typography variant="body1" gutterbottom="true">
-                      <strong>Kerusakan : </strong>
-                      <span>
-                        <ol>
-                          <li>Ganti Lcd Original Samsung 2017</li>
-                          <li>Ganti Oli</li>
-                          <li>Buka Pola Terkunci</li>
-                          <li>Ganti Speaker</li>
-                          <li>Ganti Fleksibel</li>
-                        </ol>
-                      </span>
-                      </Typography>
-                    </Hidden>
-                  </Grid>
-                  <Grid item xs={12}>
-                  <Hidden smDown>
-                    <Typography variant="h6" gutterbottom="true">
-                      <strong>Status : </strong>
-                    </Typography>
-                  </Hidden>
-                  <Hidden mdUp>
-                    <Typography variant="body1" gutterbottom="true">
-                      <strong>Status : </strong>
-                      </Typography>
-                    </Hidden>
-                    <Progress/>
-                  </Grid>
-              </Grid>
+              <Suspense fallback={<div><LinearProgress/></div>}>
+                <Result/>
+              </Suspense>
             </CardContent>
           </Card>
         </Grid>

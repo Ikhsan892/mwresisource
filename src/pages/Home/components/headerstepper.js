@@ -6,6 +6,8 @@ import {
   Stepper,
   Step,
   SvgIcon,
+  Box,
+  Grid,
   StepLabel,
   StepConnector
 } from '@material-ui/core';
@@ -211,24 +213,32 @@ const HeaderStepper = () =>  {
   const steps = getSteps();
   return (
     <div className={classes.root}>
-      <div className={classes.step1}>
-        <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel StepIconComponent={ColorlibStepIcon}></StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </div>
-      <div className={classes.step2}>
-        <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector2 />}>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </div>
+      <Box component="div" overflow="auto">
+      <Grid container direction="column" justify="center">
+          <div className={classes.step1}>
+            <Grid item>
+              <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel StepIconComponent={ColorlibStepIcon}></StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+            </Grid>
+          </div>
+          <div className={classes.step2}>
+            <Grid item>
+              <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector2 />}>
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+            </Grid>
+          </div>
+      </Grid>
+      </Box>
     </div>
   );
 }

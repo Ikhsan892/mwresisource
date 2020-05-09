@@ -1,17 +1,11 @@
 import React from 'react'
 import {
-  List,
-  ListItem,
-  ListItemText,
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
   Typography
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-function ListItemLink(props) {
-  return <ListItem button component="a" {...props} />;
-}
 const Post = ({posts, loading}) => {
   return(
     <div>

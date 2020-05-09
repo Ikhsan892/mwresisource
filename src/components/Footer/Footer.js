@@ -21,12 +21,12 @@ const Footer = () => {
               <div className="row">
                   <div className="col-lg-12">
                     <h3 class="text-center">Support Brand</h3>
-                    <LazyLoadImage effect="blur" src="/assets/sponsor.png" alt="sponsor"/>
+                    <LazyLoadImage effect="blur" src={process.env.PUBLIC_URL + '/assets/sponsor.png'} alt="sponsor"/>
                   </div>
                   <div className="col-md-6 col-lg-3 about-footer">
                       <h3>Makersware Service</h3>
                       <ul>
-                          <li><a target='__blank' href="https://wa.me/6289631996733"><i><WhatsApp/></i>0896-3199-6733</a></li>
+                          <li><a target='__blank' href="https://wa.me/6288976972688"><i><WhatsApp/></i>0889-7697-2688</a></li>
                           <li><a target='__blank' href="https://wa.me/6283875012460"><i><WhatsApp/></i>0838-7501-2460</a></li>
                           <li><i><Room/></i>
                               Jl. Pengasinan Tengah Raya No. 99 Rawalumbu
@@ -34,7 +34,7 @@ const Footer = () => {
                               <br/>Jawa Barat 17115
                           </li>
                       </ul>
-                      <a target='__blank' href="https://wa.me/6289631996733" className="btn red-btn">Ingin Service ?</a>
+                      <a target='__blank' href="https://wa.me/6283875012460" className="btn red-btn">Ingin Service ?</a>
                   </div>
                   <br/>
                   <div className="col-md-6 col-lg-2 page-more-info">
@@ -53,9 +53,9 @@ const Footer = () => {
                           <h4>Informasi</h4>
                       </div>
                       <ul>
-                          <li><a href="https://api.whatsapp.com/send?phone=6289631996733&text=Bagaimana%20Mengajukan%20Klaim%20Garansi?">Klaim Garansi</a></li>
-                          <li><a href="https://api.whatsapp.com/send?phone=6289631996733&text=Saya%20Ingin%20Menggunakan%20Home%20Service">Home Service</a></li>
-                          <li><a href="https://api.whatsapp.com/send?phone=6289631996733&text=Saya%20Ingin%20Diantar">#DianterinAja via Gosend</a></li>
+                          <li><Link to ="/informasi">Klaim Garansi</Link></li>
+                          <li><Link to="/informasi">Home Service</Link></li>
+                          <li><Link to="/informasi">#DianterinAja via Gosend</Link></li>
                       </ul>
                   </div>
                   <div className="col-md-6 col-lg-4 open-hours">
@@ -90,12 +90,12 @@ const Footer = () => {
                       <table>
                           <tbody>
                               <tr>
-                                  <td><LazyLoadImage effect="blur" src="/assets/dana.png" alt="dana"/></td>
-                                  <td><LazyLoadImage effect="blur" src="/assets/ovo.png" alt="ovo"/></td>
-                                  <td><LazyLoadImage effect="blur" src="/assets/indomaret.png" alt="indomaret"/></td>
-                                  <td><LazyLoadImage effect="blur" src="/assets/alfamart.png" alt="alfamart"/></td>
-                                  <td><LazyLoadImage effect="blur" src="/assets/bca.png" alt="bca"/></td>
-                                  <td><LazyLoadImage effect="blur" src="/assets/btn.png" alt="btn"/></td>
+                                  <td><LazyLoadImage effect="blur" src={process.env.PUBLIC_URL + "/assets/dana.png"} alt="dana"/></td>
+                                  <td><LazyLoadImage effect="blur" src={process.env.PUBLIC_URL + "/assets/ovo.png"} alt="ovo"/></td>
+                                  <td><LazyLoadImage effect="blur" src={process.env.PUBLIC_URL + "/assets/indomaret.png"} alt="indomaret"/></td>
+                                  <td><LazyLoadImage effect="blur" src={process.env.PUBLIC_URL + "/assets/alfamart.png"} alt="alfamart"/></td>
+                                  <td><LazyLoadImage effect="blur" src={process.env.PUBLIC_URL + "/assets/bca.png"} alt="bca"/></td>
+                                  <td><LazyLoadImage effect="blur" src={process.env.PUBLIC_URL + "/assets/btn.png"} alt="btn"/></td>
                               </tr>
                           </tbody>
                       </table>

@@ -1,14 +1,14 @@
-import React,{useEffect} from 'react'
+import React,{lazy,Suspense} from 'react'
 import {
   TextField,
+  LinearProgress,
   Button,
   Hidden
 } from '@material-ui/core';
-import { useLocation } from 'react-router-dom'
-import Result from './components/result'
+
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-// import 'react-lazy-load-image-component/src/effects/black-and-white.css';
 import { makeStyles } from '@material-ui/core/styles';
+const Result = lazy(() => import('./components/result'))
 const useStyles = makeStyles((theme) => ({
   image : {
     display : 'block',
@@ -22,8 +22,10 @@ const useStyles = makeStyles((theme) => ({
       height : '200px',
     },
   },
-  h2: {
-    textAlign : 'center'
+  div : {
+    width: theme.breakpoints.values.lg,
+    maxWidth: '100%',
+    margin: '0 auto',
   },
   button : {
     display:'block',
@@ -40,34 +42,43 @@ const useStyles = makeStyles((theme) => ({
 
 const Invoice = () => {
   const classes = useStyles()
-  const [value, setValue] = React.useState('')
-  function useQuery() {
-    return new URLSearchParams(useLocation().search);
-  }
-  let query = useQuery()
+  // const [value, setValue] = React.useState('')
+  // function useQuery() {
+  //   return new URLSearchParams(useLocation().search);
+  // }
+  // let query = useQuery()
 
-  useEffect(() => {
-    if(query.get('resi')){
-      setValue(query.get('resi'))
-    }
-  },[value])
+  // useEffect(() => {
+  //   if(query.get('resi')){
+  //     setValue(query.get('resi'))
+  //   }
+  // },[value])
   return(
     <div>
       <LazyLoadImage src = "/assets/invoice.svg" alt="Invoice" className={classes.image}/>
       <Hidden smDown>
-        <h2 className={classes.h2}>Cari Tagihan mu Disini</h2>
+        <h2 style={{textAlign:'center'}}>Cari Tagihanmu Disini</h2>
       </Hidden>
       <Hidden mdUp>
-        <h4 className={classes.h2}>Cari Tagihan mu Disini</h4>
+        <h4 style={{textAlign:'center'}}>Cari Tagihanmu Disini</h4>
       </Hidden>
       <hr/>
-      <TextField color="inherit" id="outlined-basic" label="Masukkan Nomor Resi" variant="outlined" fullWidth value={value}/>
+      <form onSubmit={(e) => {
+        e.preventDefault()
+        alert('submit')
+      }} autoComplete ="off">
+        <TextField id="outlined-basic" style={{boxSizing:'content-box'}}label="Masukkan Nomor Resi" variant="outlined" fullWidth/>
+        <br/>
+        <Button variant="contained" color="primary" className={classes.button}>
+          CEK INVOICE
+        </Button>
+      </form>
       <br/>
-      <Button variant="contained" color="primary" className={classes.button}>
-        CEK INVOICE
-      </Button>
-      <br/>
-      <Result/>
+      <div className={classes.div}>
+        <Suspense fallback={<div><LinearProgress/></div>}>
+          <Result/>
+        </Suspense>
+      </div>
     </div>
   )
 }

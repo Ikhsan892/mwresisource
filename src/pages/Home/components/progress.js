@@ -23,7 +23,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
 }));
-
+function getDates(){
+  return ['20 Maret 2020', '20 Maret 2020', '21 Maret 2020', '21 Maret 2020'].reverse();
+}
 function getSteps() {
   return ['Membongkar HP', 'Penggantian Lcd', 'Ganti Konektor', 'Pemasangan Lcd'].reverse();
 }
@@ -41,7 +43,7 @@ export default function Progress() {
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label}>
-            <StepLabel optional={<Typography variant="caption">2 jam yang lalu</Typography>}>{label}</StepLabel>
+            <StepLabel optional={<Typography variant="caption">{getDates()[index]} - <span>(2 jam yang lalu)</span></Typography>}>{label}</StepLabel>
             <StepContent>
               {getcontent()[index]}
             </StepContent>

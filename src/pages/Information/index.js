@@ -1,1 +1,1 @@
-export {default} from './Information.js'
+export {default} from './Information'

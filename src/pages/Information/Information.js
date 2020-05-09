@@ -1,14 +1,14 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect,lazy,Suspense} from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Post from './components/Post'
-import Paginasi from './components/Pagination'
 // import 'react-lazy-load-image-component/src/effects/black-and-white.css';
 import {
   Hidden,
   Grid,
-  CircularProgress
+  LinearProgress
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+const Post = lazy(() => import('./components/Post'))
+const Paginasi = lazy(() => import('./components/Pagination'))
 const useStyles  = makeStyles((theme) => ({
   image : {
     display : 'block',
@@ -30,7 +30,7 @@ const Information = () => {
   const classes = useStyles()
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
-  const [postPerPage, setPostPerPage] = useState(5)
+  const [postPerPage] = useState(20)
   const [currentPage, setCurrentPage] = useState(1)
 
 
@@ -64,15 +64,17 @@ const Information = () => {
             alignItems="center"
             spacing={5}
           >
-          <Grid item xs={12} md={6} lg={9}>
-          {
-            loading ?  <CircularProgress/> :
-              <Post posts = {currentPost} loading = {loading}/>
-          }
-          </Grid>
-          <Grid item xs={12} md={6} lg={6}>
-            <Paginasi totalPost={posts.length} postPerPage={postPerPage} paginate={pageNumber}/>
-          </Grid>
+          <Suspense fallback={<div><LinearProgress/></div>}>
+            <Grid item xs={12} md={6} lg={9}>
+            {
+              loading ?  <LinearProgress/> :
+                <Post posts = {currentPost} loading = {loading}/>
+            }
+            </Grid>
+            <Grid item xs={12} md={6} lg={6}>
+              <Paginasi totalPost={posts.length} postPerPage={postPerPage} paginate={pageNumber}/>
+            </Grid>
+          </Suspense>
         </Grid>
       </div>
     )

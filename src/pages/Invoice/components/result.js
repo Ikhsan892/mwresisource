@@ -13,14 +13,16 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Button,
+  Box,
   colors
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+  },
   content: {
-    padding: theme.spacing(6)
+    padding: theme.spacing(6),
+    minWidth : '800px',
   },
   kop : {
     width : 'auto',
@@ -31,7 +33,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   marginTop: {
-    marginTop: theme.spacing(4)
+    marginTop: theme.spacing(4),
+    width : '100%'
   },
   dates: {
     padding: theme.spacing(2),
@@ -46,6 +49,7 @@ const Result = () => {
     <Card
     className={clsx(classes.root)}
   >
+      <Box overflow="auto" component="div">
     <CardContent className={classes.content}>
       <Grid
         container
@@ -60,9 +64,7 @@ const Result = () => {
             component="h4"
             variant="h4"
           >
-            <Button variant="outlined" color="primary" style={{cursor : 'not-allowed', pointerEvents:'none'}} size="large">
-              LUNAS
-            </Button>
+            LUNAS
           </Typography>
         </Grid>
       </Grid>
@@ -231,6 +233,7 @@ const Result = () => {
         </Typography>
       </div>
     </CardContent>
+    </Box>
   </Card>
   )
 }
