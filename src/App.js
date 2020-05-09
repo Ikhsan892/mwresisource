@@ -8,6 +8,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Container from '@material-ui/core/Container';
 import {BrowserRouter as Router,Switch,Route } from "react-router-dom";
 const Layout = lazy(() => import('./layout'))
+const Carousel = lazy(() => import('./components/Carousel'))
 function App() {
   const [dark, setDark] = useState(JSON.parse(localStorage.getItem('dark')))
   const mainTheme = createMuiTheme({
@@ -30,8 +31,11 @@ function App() {
                 <Suspense fallback={<div><LinearProgress/></div>}>
                   <ScopedCssBaseline>
                     <Layout toggle={<DarkToggle check={JSON.parse(localStorage.getItem('dark'))} click={toggle}/>}>
-                      <Container style={{marginTop : '50px'}}>
+                      <Container style={{marginTop : '50px', paddingTop:'30px'}}>
                         <ScopedCssBaseline>
+                          <Suspense fallback={<div>Loading...</div>}>
+                            <Carousel/>
+                          </Suspense>
                               <Switch>
                                 <Suspense fallback={<div><LinearProgress/></div>}>
                                   <ScopedCssBaseline>
