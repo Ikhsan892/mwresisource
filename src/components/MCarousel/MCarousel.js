@@ -15,31 +15,31 @@ const tutorialSteps = [
     label: 'San Francisco – Oakland Bay Bridge, United States',
     link : 'https://instagram.com',
     imgPath:
-      '/assets/banner1.jpg',
+      '/assets/mbanner1.jpg',
   },
   {
     label: 'Bird',
     link : 'https://instagram.com',
     imgPath:
-      '/assets/banner2.jpg',
+      '/assets/mbanner2.jpg',
   },
   {
     label: 'Bali, Indonesia',
     link : 'https://instagram.com',
     imgPath:
-      '/assets/banner3.jpg',
+      '/assets/mbanner3.jpg',
   },
   {
     label: 'NeONBRAND Digital Marketing, Las Vegas, United States',
     link : 'https://instagram.com',
     imgPath:
-      '/assets/banner4.jpg',
+      '/assets/mbanner4.jpg',
   },
   {
     label: 'Goč, Serbia',
     link : 'https://instagram.com',
     imgPath:
-      '/assets/banner5.jpg',
+      '/assets/mbanner5.jpg',
   },
 ];
 
@@ -55,7 +55,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   img: {
-    height: '375px',
+    height: '400px',
+    objectFit : 'cover',
     display: 'block',
     maxWidth: 'auto',
     marginLeft : 'auto',
@@ -65,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Carousel() {
+function MCarousel() {
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -123,4 +124,4 @@ function Carousel() {
   );
 }
 
-export default Carousel;
+export default MCarousel;

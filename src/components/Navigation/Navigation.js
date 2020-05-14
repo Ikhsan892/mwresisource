@@ -1,5 +1,6 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, {useEffect,useState} from 'react';
+// import PropTypes from 'prop-types';
+import { makeStyles} from '@material-ui/core/styles';
 import {
   AppBar,
   Toolbar,
@@ -12,6 +13,13 @@ import {Link} from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+  },
+  mainbar : {
+    top : '0px',
+    [theme.breakpoints.down('xs')]:{
+      top : props => props.top
+    },
+    transition : 'top 0.3s'
   },
   sectionDesktop: {
    display: 'none',
@@ -28,11 +36,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navigation = ({children}) => {
-  const classes = useStyles();
-
+  const [topval, setTopval] = useState('-60px')
+  useEffect(() => {
+    window.onscroll = () => {
+      if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20){
+        setTopval('0px')
+      }else{
+        setTopval('-60px')
+      }
+    }
+  },[])
+  const props = { top : topval };
+  const classes = useStyles(props);
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" color="primary">
+      <AppBar position="fixed" color="primary" className={classes.mainbar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Makersware Service Track
@@ -48,5 +66,4 @@ const Navigation = ({children}) => {
     </div>
   );
 }
-
 export default Navigation

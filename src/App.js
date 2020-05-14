@@ -5,6 +5,7 @@ import DarkToggle from './components/DarkToggle'
 import {ThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Hidden from '@material-ui/core/Hidden';
 import Container from '@material-ui/core/Container';
 import {BrowserRouter as Router,Switch,Route } from "react-router-dom";
 const Layout = lazy(() => import('./layout'))
@@ -31,11 +32,13 @@ function App() {
                 <Suspense fallback={<div><LinearProgress/></div>}>
                   <ScopedCssBaseline>
                     <Layout toggle={<DarkToggle check={JSON.parse(localStorage.getItem('dark'))} click={toggle}/>}>
-                      <Container style={{marginTop : '50px', paddingTop:'30px'}}>
+                      <Container style={{ paddingTop:'70px'}}>
                         <ScopedCssBaseline>
-                          <Suspense fallback={<div>Loading...</div>}>
-                            <Carousel/>
-                          </Suspense>
+                          <Hidden xsDown>
+                            <Suspense fallback={<div>Loading...</div>}>
+                              <Carousel/>
+                            </Suspense>
+                          </Hidden>
                               <Switch>
                                 <Suspense fallback={<div><LinearProgress/></div>}>
                                   <ScopedCssBaseline>

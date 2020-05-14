@@ -59,17 +59,17 @@ const Home = () => {
     <div>
       <LazyLoadImage src ="/assets/track.svg" alt="Track" className={classes.image}/>
       <Hidden smDown>
-        <h2 className={classes.h2}>Lacak Perkembangan Barangmu dengan Mudah</h2>
+        <h2 className={classes.h2}>Lacak Perkembangan Gadget-mu dengan Mudah</h2>
       </Hidden>
       <Hidden mdUp>
-        <h4 className={classes.h2}>Lacak Perkembangan Barangmu dengan Mudah</h4>
+        <h4 className={classes.h2}>Lacak Perkembangan Gadget-mu dengan Mudah</h4>
       </Hidden>
       <hr/>
       <form onSubmit={(e) => {
         e.preventDefault()
         alert('submit')
       }} autoComplete ="off">
-        <TextField id="outlined-basic" style={{boxSizing:'content-box'}}label="Masukkan Nomor Resi" variant="outlined" fullWidth/>
+        <TextField id="outlined-basic" style={{boxSizing:'content-box'}} variant="outlined" fullWidth placeholder="Masukkan Nomor Resi"/>
         <br/>
         <Button variant="contained" color="primary" className={classes.button}>
           CEK RESI
