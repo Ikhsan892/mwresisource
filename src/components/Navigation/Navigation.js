@@ -56,7 +56,8 @@ const Navigation = ({children}) => {
             Makersware Service Track
           </Typography>
           <Hidden smDown>
-            <Button color="inherit" component={Link} to="/">Home</Button>
+            <Button color="inherit" component={Link} to='/home'>Home</Button>
+            <Button color="inherit" component={Link} to="/track">Track</Button>
             <Button color="inherit" component={Link} to="/invoice">Invoice</Button>
             <Button color="inherit" component={Link} to="/information">Informasi</Button>
           </Hidden>

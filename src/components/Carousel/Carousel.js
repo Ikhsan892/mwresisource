@@ -46,6 +46,7 @@ const tutorialSteps = [
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    paddingTop:'70px'
   },
   header: {
     display: 'flex',

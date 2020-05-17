@@ -13,39 +13,36 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const tutorialSteps = [
   {
     label: 'San Francisco – Oakland Bay Bridge, United States',
-    link : 'https://instagram.com',
+    link : 'https://instagram.com/makerswareofficial',
     imgPath:
       '/assets/mbanner1.jpg',
   },
   {
     label: 'Bird',
-    link : 'https://instagram.com',
+    link : 'https://instagram.com/makerswareofficial',
     imgPath:
       '/assets/mbanner2.jpg',
   },
   {
     label: 'Bali, Indonesia',
-    link : 'https://instagram.com',
+    link : 'https://instagram.com/makerswareofficial',
     imgPath:
       '/assets/mbanner3.jpg',
   },
   {
     label: 'NeONBRAND Digital Marketing, Las Vegas, United States',
-    link : 'https://instagram.com',
+    link : 'https://instagram.com/makerswareofficial',
     imgPath:
       '/assets/mbanner4.jpg',
-  },
-  {
-    label: 'Goč, Serbia',
-    link : 'https://instagram.com',
-    imgPath:
-      '/assets/mbanner5.jpg',
   },
 ];
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    height : '350px',
+    marginBottom : '50px',
+    width : '100%',
   },
   header: {
     display: 'flex',
@@ -55,14 +52,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   img: {
-    height: '400px',
-    objectFit : 'cover',
     display: 'block',
-    maxWidth: 'auto',
-    marginLeft : 'auto',
-    marginRight : 'auto',
+    width: 'auto',
+    height : '350px',
+    margin: '0 auto',
     overflow: 'hidden',
-    width: '100%',
   },
 }));
 

@@ -11,8 +11,29 @@ import {
   Email,
   QueryBuilder
 } from '@material-ui/icons';
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 
+// <div className="col-md-6 col-lg-2 page-more-info">
+//     <div className="footer-title">
+//         <h4>Halaman</h4>
+//     </div>
+//     <ul>
+//         <li><Link to="/">Home</Link></li>
+//         <li><Link to="/invoice">Invoice</Link></li>
+//         <li><Link to="/informasi">Informasi</Link></li>
+//     </ul>
+// </div>
+//
+// <div className="col-md-6 col-lg-3 page-more-info">
+//     <div className="footer-title">
+//         <h4>Informasi</h4>
+//     </div>
+//     <ul>
+//         <li><Link to ="/informasi">Klaim Garansi</Link></li>
+//         <li><Link to="/informasi">Home Service</Link></li>
+//         <li><Link to="/informasi">#DianterinAja via Gosend</Link></li>
+//     </ul>
+// </div>
 const Footer = () => {
   return(
     <footer>
@@ -20,11 +41,11 @@ const Footer = () => {
           <div className="footer-top">
               <div className="row">
                   <div className="col-lg-12">
-                    <h3 class="text-center">Support Brand</h3>
+                    <h3 className="text-center">Support Brand</h3>
                     <LazyLoadImage effect="blur" src={process.env.PUBLIC_URL + '/assets/sponsor.png'} alt="sponsor"/>
                   </div>
                   <div className="col-md-6 col-lg-3 about-footer">
-                      <h3>Makersware Service</h3>
+                      <h3 className="center">Makersware Service Workshop</h3>
                       <ul>
                           <li><a target='__blank' href="https://wa.me/6288976972688"><i><WhatsApp/></i>0889-7697-2688</a></li>
                           <li><a target='__blank' href="https://wa.me/6283875012460"><i><WhatsApp/></i>0838-7501-2460</a></li>
@@ -34,30 +55,14 @@ const Footer = () => {
                               <br/>Jawa Barat 17115
                           </li>
                       </ul>
-                      <a target='__blank' href="https://wa.me/6283875012460" className="btn red-btn">Booking Service</a>
+                      <a target='__blank' href="https://wa.me/6283875012460" className="btn btn-block red-btn">Booking Service</a>
                   </div>
                   <br/>
                   <div className="col-md-6 col-lg-2 page-more-info">
-                      <div className="footer-title">
-                          <h4>Halaman</h4>
-                      </div>
-                      <ul>
-                          <li><Link to="/">Home</Link></li>
-                          <li><Link to="/invoice">Invoice</Link></li>
-                          <li><Link to="/informasi">Informasi</Link></li>
-                      </ul>
                   </div>
-
                   <div className="col-md-6 col-lg-3 page-more-info">
-                      <div className="footer-title">
-                          <h4>Informasi</h4>
-                      </div>
-                      <ul>
-                          <li><Link to ="/informasi">Klaim Garansi</Link></li>
-                          <li><Link to="/informasi">Home Service</Link></li>
-                          <li><Link to="/informasi">#DianterinAja via Gosend</Link></li>
-                      </ul>
                   </div>
+                  <br/>
                   <div className="col-md-6 col-lg-4 open-hours">
                       <div className="footer-title">
                           <h4>Jam Pelayanan</h4>
@@ -107,6 +112,7 @@ const Footer = () => {
           <div className="footer-bottom">
               <div className="row">
                   <div className="col-sm-4">
+                    <a href="#" className="btn red-btn">Top</a>
                   </div>
                   <div className="col-sm-8">
                       <p>Makersware Service @ 2020 All rights reserved</p>

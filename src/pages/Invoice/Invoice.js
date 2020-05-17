@@ -3,9 +3,9 @@ import {
   TextField,
   LinearProgress,
   Button,
-  Hidden
+  Hidden,
+  Container
 } from '@material-ui/core';
-
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { makeStyles } from '@material-ui/core/styles';
 const Result = lazy(() => import('./components/result'))
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Invoice = () => {
+const Invoice = ({carousel,mcarousel}) => {
   const classes = useStyles()
   // const [value, setValue] = React.useState('')
   // function useQuery() {
@@ -55,30 +55,42 @@ const Invoice = () => {
   // },[value])
   return(
     <div>
-      <LazyLoadImage src = "/assets/invoice.svg" alt="Invoice" className={classes.image}/>
-      <Hidden smDown>
-        <h2 style={{textAlign:'center'}}>Cari Tagihanmu Disini</h2>
-      </Hidden>
-      <Hidden mdUp>
-        <h4 style={{textAlign:'center'}}>Cari Tagihanmu Disini</h4>
-      </Hidden>
-      <hr/>
-      <form onSubmit={(e) => {
-        e.preventDefault()
-        alert('submit')
-      }} autoComplete ="off">
-        <TextField id="outlined-basic" style={{boxSizing:'content-box'}}label="Masukkan Nomor Resi" variant="outlined" fullWidth/>
-        <br/>
-        <Button variant="contained" color="primary" className={classes.button}>
-          CEK INVOICE
-        </Button>
-      </form>
-      <br/>
-      <div className={classes.div}>
-        <Suspense fallback={<div><LinearProgress/></div>}>
-          <Result/>
+      <Hidden smUp>
+        <Suspense fallback={<div>Loading...</div>}>
+            {mcarousel}
         </Suspense>
-      </div>
+      </Hidden>
+      <Container>
+        <Hidden xsDown>
+          <Suspense fallback={<div>Loading...</div>}>
+              {carousel}
+          </Suspense>
+        </Hidden>
+        <LazyLoadImage src = "/assets/invoice.svg" alt="Invoice" className={classes.image}/>
+        <Hidden smDown>
+          <h2 style={{textAlign:'center'}}>Cari Tagihanmu Disini</h2>
+        </Hidden>
+        <Hidden mdUp>
+          <h4 style={{textAlign:'center'}}>Cari Tagihanmu Disini</h4>
+        </Hidden>
+        <hr/>
+        <form onSubmit={(e) => {
+          e.preventDefault()
+          alert('submit')
+        }} autoComplete ="off">
+          <TextField id="outlined-basic" style={{boxSizing:'content-box'}} placeholder="Masukkan Nomor Resi" variant="outlined" fullWidth/>
+          <br/>
+          <Button variant="contained" color="primary" className={classes.button}>
+            CEK INVOICE
+          </Button>
+        </form>
+        <br/>
+        <div className={classes.div}>
+          <Suspense fallback={<div><LinearProgress/></div>}>
+            <Result/>
+          </Suspense>
+        </div>
+      </Container>
     </div>
   )
 }

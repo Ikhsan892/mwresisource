@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import clsx from 'clsx';
 import {
   Card,
@@ -10,6 +11,7 @@ import {
   Typography,
   Table,
   TableHead,
+  Button,
   TableBody,
   TableRow,
   TableCell,
@@ -19,6 +21,19 @@ import {
 
 const useStyles = makeStyles(theme => ({
   root: {
+  },
+  button : {
+    display:'block',
+    width : '50%',
+    color : 'white',
+    marginLeft: 'auto',
+    backgroundColor : 'red',
+    marginRight: 'auto',
+    marginTop: '30px',
+    marginBottom : '10px',
+    [theme.breakpoints.up('sm')] : {
+      width : '30%',
+    },
   },
   content: {
     padding: theme.spacing(6),
@@ -46,6 +61,7 @@ const Result = () => {
 
   const classes = useStyles()
   return(
+  <div>
     <Card
     className={clsx(classes.root)}
   >
@@ -61,8 +77,8 @@ const Result = () => {
         <Grid item>
           <Typography
             align="right"
-            component="h4"
-            variant="h4"
+            component="h3"
+            variant="h3"
           >
             LUNAS
           </Typography>
@@ -235,6 +251,15 @@ const Result = () => {
     </CardContent>
     </Box>
   </Card>
+  <br/>
+      <Button
+        variant="contained"
+        className={classes.button}
+        endIcon={<GetAppIcon />}
+      >
+        Download as PDF
+      </Button>
+  </div>
   )
 }
 

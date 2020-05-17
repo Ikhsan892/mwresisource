@@ -4,7 +4,6 @@ import './index.css';
 import LinearProgress from '@material-ui/core/LinearProgress'
 import * as serviceWorker from './serviceWorker';
 const App  = lazy(() => import('./App'));
-
 ReactDOM.render(
   <div>
     <Suspense fallback={<div><LinearProgress/></div>}>

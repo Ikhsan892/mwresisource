@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme =>({
   root: {
      bottom : 0,
      width : '100%',
-     position : 'fixed'
+     position : 'fixed',
+     borderTop : '2px solid #ccc'
   },
 }));
 
@@ -34,7 +35,8 @@ const NavigationBottom = () => {
       className={classes.root}
       color="primary"
     >
-      <BottomNavigationAction label="Home" component={Link} to="/" icon={<Home />} />
+      <BottomNavigationAction label="Home" component={Link} to="/home" icon={<Home />} />
+      <BottomNavigationAction label="Track" component={Link} to="/track" icon={<Home />} />
       <BottomNavigationAction label="Invoice" component={Link} to="/invoice" icon={<Receipt />} />
       <BottomNavigationAction label="Informasi" component={Link} to="/information" icon={<Info />} />
     </BottomNavigation>
