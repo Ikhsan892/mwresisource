@@ -8,7 +8,8 @@ import { withRouter, Link } from "react-router-dom";
 import {
   Receipt,
   Info,
-  Home
+  Home,
+  TrackChanges,
 } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme =>({
@@ -16,7 +17,8 @@ const useStyles = makeStyles(theme =>({
      bottom : 0,
      width : '100%',
      position : 'fixed',
-     borderTop : '2px solid #ccc'
+     borderTop : '2px solid #ccc',
+     zIndex : 1,
   },
 }));
 
@@ -36,7 +38,7 @@ const NavigationBottom = () => {
       color="primary"
     >
       <BottomNavigationAction label="Home" component={Link} to="/home" icon={<Home />} />
-      <BottomNavigationAction label="Track" component={Link} to="/track" icon={<Home />} />
+      <BottomNavigationAction label="Track" component={Link} to="/track" icon={<TrackChanges />} />
       <BottomNavigationAction label="Invoice" component={Link} to="/invoice" icon={<Receipt />} />
       <BottomNavigationAction label="Informasi" component={Link} to="/information" icon={<Info />} />
     </BottomNavigation>

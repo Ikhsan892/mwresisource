@@ -8,14 +8,14 @@ import {
   Button,
   Hidden
 } from '@material-ui/core';
-import {Link} from 'react-router-dom'
+import {Link,useLocation} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   mainbar : {
-    top : '0px',
+    top : props => props.toponhome,
     [theme.breakpoints.down('xs')]:{
       top : props => props.top
     },
@@ -36,24 +36,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navigation = ({children}) => {
+  let url = useLocation()
   const [topval, setTopval] = useState('-60px')
+  const [tophome, setTophome] = useState('-70px')
   useEffect(() => {
+    console.log(url.pathname)
     window.onscroll = () => {
-      if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20){
-        setTopval('0px')
-      }else{
+      if(url.pathname === '/home'){
         setTopval('-60px')
+      }else{
+        if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20){
+          setTopval('0px')
+        }else{
+          setTopval('-60px')
+        }
       }
     }
-  },[])
-  const props = { top : topval };
+    if(url.pathname === '/home'){
+      setTophome('-70px')
+      setTopval('-60px')
+      // window.onscroll = () => {
+      //   if(document.body.scrollTop > 40 || document.documentElement.scrollTop > 40){
+      //     setTophome('0px')
+      //   }else{
+      //     setTophome('-70px')
+      //   }
+      // }
+    }else{
+      setTophome('0px')
+    }
+  },[url])
+  const props = { top : topval , toponhome : tophome};
   const classes = useStyles(props);
   return (
     <div className={classes.root}>
       <AppBar position="fixed" color="primary" className={classes.mainbar}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Makersware Service Track
+            Makersware Service
           </Typography>
           <Hidden smDown>
             <Button color="inherit" component={Link} to='/home'>Home</Button>

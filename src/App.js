@@ -1,4 +1,4 @@
-import React,{useState,useEffect, lazy, Suspense} from 'react';
+import React,{useState, lazy, Suspense} from 'react';
 import './App.css';
 import Blue from '@material-ui/core/colors/blue'
 import DarkToggle from './components/DarkToggle'

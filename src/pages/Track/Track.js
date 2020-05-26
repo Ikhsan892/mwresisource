@@ -83,7 +83,7 @@ const Track = ({carousel, mcarousel}) => {
         }} autoComplete ="off">
           <TextField id="outlined-basic" style={{boxSizing:'content-box'}} variant="outlined" fullWidth placeholder="Masukkan Nomor Resi"/>
           <br/>
-          <Button variant="contained" color="primary" className={classes.button}>
+          <Button variant="contained" color="primary" className={classes.button} type="submit">
             CEK RESI
           </Button>
         </form>

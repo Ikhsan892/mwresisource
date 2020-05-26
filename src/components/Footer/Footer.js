@@ -55,7 +55,7 @@ const Footer = () => {
                               <br/>Jawa Barat 17115
                           </li>
                       </ul>
-                      <a target='__blank' href="https://wa.me/6283875012460" className="btn btn-block red-btn">Booking Service</a>
+                      <a target='__blank' href="https://wa.me/6283875012460">Booking Service</a>
                   </div>
                   <br/>
                   <div className="col-md-6 col-lg-2 page-more-info">
