@@ -1,47 +1,47 @@
-import React,{lazy,Suspense} from 'react'
+import React, { lazy, Suspense } from "react";
 import {
   TextField,
   LinearProgress,
   Button,
   Hidden,
-  Container
-} from '@material-ui/core';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { makeStyles } from '@material-ui/core/styles';
-const Result = lazy(() => import('./components/result'))
+  Container,
+} from "@material-ui/core";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { makeStyles } from "@material-ui/core/styles";
+const Result = lazy(() => import("./components/result"));
 const useStyles = makeStyles((theme) => ({
-  image : {
-    display : 'block',
-    marginTop : '5px',
-    marginRight: 'auto',
-    marginLeft : 'auto',
-    width : '400px',
-    height : '400px',
-    [theme.breakpoints.down('sm')] : {
-      width : '200px',
-      height : '200px',
+  image: {
+    display: "block",
+    marginTop: "5px",
+    marginRight: "auto",
+    marginLeft: "auto",
+    width: "400px",
+    height: "400px",
+    [theme.breakpoints.down("sm")]: {
+      width: "200px",
+      height: "200px",
     },
   },
-  div : {
+  div: {
     width: theme.breakpoints.values.lg,
-    maxWidth: '100%',
-    margin: '0 auto',
+    maxWidth: "100%",
+    margin: "0 auto",
   },
-  button : {
-    display:'block',
-    width : '50%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: '30px',
-    marginBottom : '10px',
-    [theme.breakpoints.up('sm')] : {
-      width : '30%',
+  button: {
+    display: "block",
+    width: "50%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "30px",
+    marginBottom: "10px",
+    [theme.breakpoints.up("sm")]: {
+      width: "30%",
     },
-  }
+  },
 }));
 
-const Invoice = ({carousel,mcarousel}) => {
-  const classes = useStyles()
+const Invoice = ({ carousel, mcarousel }) => {
+  const classes = useStyles();
   // const [value, setValue] = React.useState('')
   // function useQuery() {
   //   return new URLSearchParams(useLocation().search);
@@ -53,46 +53,62 @@ const Invoice = ({carousel,mcarousel}) => {
   //     setValue(query.get('resi'))
   //   }
   // },[value])
-  return(
+  return (
     <div>
       <Hidden smUp>
-        <Suspense fallback={<div>Loading...</div>}>
-            {mcarousel}
-        </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>{mcarousel}</Suspense>
       </Hidden>
       <Container>
         <Hidden xsDown>
-          <Suspense fallback={<div>Loading...</div>}>
-              {carousel}
-          </Suspense>
+          <Suspense fallback={<div>Loading...</div>}>{carousel}</Suspense>
         </Hidden>
-        <LazyLoadImage src = "/assets/invoice.svg" alt="Invoice" className={classes.image}/>
+        <LazyLoadImage
+          src='/assets/invoice.svg'
+          alt='Invoice'
+          className={classes.image}
+        />
         <Hidden smDown>
-          <h2 style={{textAlign:'center'}}>Cari Tagihanmu Disini</h2>
+          <h2 style={{ textAlign: "center" }}>Cari Tagihanmu Disini</h2>
         </Hidden>
         <Hidden mdUp>
-          <h4 style={{textAlign:'center'}}>Cari Tagihanmu Disini</h4>
+          <h4 style={{ textAlign: "center" }}>Cari Tagihanmu Disini</h4>
         </Hidden>
-        <hr/>
-        <form onSubmit={(e) => {
-          e.preventDefault()
-          alert('submit')
-        }} autoComplete ="off">
-          <TextField id="outlined-basic" style={{boxSizing:'content-box'}} placeholder="Masukkan Nomor Resi" variant="outlined" fullWidth/>
-          <br/>
-          <Button variant="contained" color="primary" className={classes.button}>
+        <hr />
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            alert("submit");
+          }}
+          autoComplete='off'>
+          <TextField
+            id='outlined-basic'
+            style={{ boxSizing: "content-box" }}
+            placeholder='Masukkan Nomor Resi'
+            variant='outlined'
+            fullWidth
+          />
+          <br />
+          <Button
+            variant='contained'
+            color='primary'
+            className={classes.button}>
             CEK INVOICE
           </Button>
         </form>
-        <br/>
+        <br />
         <div className={classes.div}>
-          <Suspense fallback={<div><LinearProgress/></div>}>
-            <Result/>
+          <Suspense
+            fallback={
+              <div>
+                <LinearProgress />
+              </div>
+            }>
+            <Result />
           </Suspense>
         </div>
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default Invoice
+export default Invoice;

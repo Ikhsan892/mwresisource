@@ -11,6 +11,7 @@ import {
   Email,
   QueryBuilder
 } from '@material-ui/icons';
+import Fab from '@material-ui/core/Fab';
 // import {Link} from 'react-router-dom'
 
 // <div className="col-md-6 col-lg-2 page-more-info">
@@ -55,7 +56,11 @@ const Footer = () => {
                               <br/>Jawa Barat 17115
                           </li>
                       </ul>
-                      <a target='__blank' href="https://wa.me/6283875012460">Booking Service</a>
+                      <a target='__blank' href="https://wa.me/6283875012460">
+                           <Fab variant="extended" color="primary">
+                                Booking Service
+                            </Fab>
+                      </a>
                   </div>
                   <br/>
                   <div className="col-md-6 col-lg-2 page-more-info">
@@ -112,7 +117,7 @@ const Footer = () => {
           <div className="footer-bottom">
               <div className="row">
                   <div className="col-sm-4">
-                    <a href="#" className="btn red-btn">Top</a>
+                    
                   </div>
                   <div className="col-sm-8">
                       <p>Makersware Service @ 2020 All rights reserved</p>
