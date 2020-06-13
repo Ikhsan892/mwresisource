@@ -24,20 +24,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function getDates(){
-  return ['20 Maret 2020', '20 Maret 2020', '21 Maret 2020', '21 Maret 2020'].reverse();
+  return ['20 Maret 2020', '20 Maret 2020', '21 Maret 2020', '21 Maret 2020'];
 }
 function getSteps() {
-  return ['Membongkar HP', 'Penggantian Lcd', 'Ganti Konektor', 'Pemasangan Lcd'].reverse();
+  return ['Membongkar HP', 'Penggantian Lcd', 'Ganti Konektor', 'Pemasangan Lcd'];
 }
 function getcontent(){
-  return ['Membuka dalaman hp dengan hati hati', 'Menggan Lcd membutuhkan waktu 4 jam','ganti konektor mantap','masang lcd dan di lem '].reverse()
+  return ['Membuka dalaman hp dengan hati hati', 'Menggan Lcd membutuhkan waktu 4 jam','ganti konektor mantap','masang lcd dan di lem ']
+}
+function complete(){
+  return ["true",'true','false',"false"];
+}
+function active(){
+  let active = complete()
+  let search = active.reduce((n,val) => {
+    return n + (val === 'true')
+  }
+    ,0)
+
+  return search+=1
 }
 
 export default function Progress() {
   const classes = useStyles();
-  const [activeStep] = React.useState(0);
+  const [activeStep] = React.useState(3);
   const steps = getSteps();
-
   return (
     <div className={classes.root}>
       <Stepper activeStep={activeStep} orientation="vertical">

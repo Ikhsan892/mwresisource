@@ -1,66 +1,84 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios'
 import { Grid } from "@material-ui/core";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import "./bootstrap.min.css";
 import "./Home.css";
 import Check from "@material-ui/icons/Check";
 import { Link } from "react-router-dom";
 import Testi from "./testi";
-const useStyles = makeStyles((theme) => ({
-  root: {},
-  card: {
-    maxWidth: "345px",
-    paddingTop: "40px",
-  },
-  navbarlogo: {
-    color: "white",
-    left: 20,
-    letterSpacing: "2px",
-    float: "left",
-    paddingLeft: "100px",
-    // textAlign:'center',
-    lineHeight: "60px",
-  },
-  nav: {
-    height: "70px",
-    background: "transparent",
-    borderBottom: "2px solid #fff",
-    zIndex: "1",
-  },
-  ul: {
-    color: "#fff",
-    float: "right",
-    width: "500px",
-    paddingRight: "70px",
-    display: "flex",
-    zIndex: 0,
-    listStyle: "none",
-    lineHeight: "60px",
-    justifyContent: "space-around",
-  },
-  imagecenter: {
-    margin: "0 auto",
-  },
-  li: {
-    fontSize: "15px",
-    letterSpacing: "0.5px",
-    textDecoration: "none",
-    color: "#fff",
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
-    },
-    "&:hover": {
-      borderBottom: "1px solid #fff",
-      transition: "0.3s",
-    },
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {},
+//   card: {
+//     maxWidth: "345px",
+//     paddingTop: "40px",
+//   },
+//   navbarlogo: {
+//     color: "white",
+//     left: 20,
+//     letterSpacing: "2px",
+//     float: "left",
+//     paddingLeft: "100px",
+//     // textAlign:'center',
+//     lineHeight: "60px",
+//   },
+//   nav: {
+//     height: "70px",
+//     background: "transparent",
+//     borderBottom: "2px solid #fff",
+//     zIndex: "1",
+//   },
+//   ul: {
+//     color: "#fff",
+//     float: "right",
+//     width: "500px",
+//     paddingRight: "70px",
+//     display: "flex",
+//     zIndex: 0,
+//     listStyle: "none",
+//     lineHeight: "60px",
+//     justifyContent: "space-around",
+//   },
+//   imagecenter: {
+//     margin: "0 auto",
+//   },
+//   li: {
+//     fontSize: "15px",
+//     letterSpacing: "0.5px",
+//     textDecoration: "none",
+//     color: "#fff",
+//     [theme.breakpoints.down("sm")]: {
+//       display: "none",
+//     },
+//     "&:hover": {
+//       borderBottom: "1px solid #fff",
+//       transition: "0.3s",
+//     },
+//   },
+// }));
 const Home = () => {
-  const classes = useStyles();
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    // const fetcher = await fetch("http://localhost/ci-rest-jwt/api/layout", {
+    //   headers: {
+    //     'Content-Type' : 'application/json',
+    //     'Authorization':
+    //       "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJ1c2VybmFtZSI6ImlraHNhbiIsImlhdCI6MTU5MTM2NzcxNSwiZXhwIjoxNTkxMzg1NzE1fQ._qPsRshDRmlBugjUNN_6bzsKvguHqlfqY1LqwsiGoUo",
+    //   }
+    // })
+    async function fetching(){
+      await axios.get('https://jsonplaceholder.typicode.com/posts')
+      .then(result => {
+        setData([result.data])
+      })
+    }
+    fetching()
+  },[]);
+  console.log(data)
   return (
-    <div className={classes.root}>
+    <div>
       <header className='header_area'>
         <div className='main_menu'>
           <nav className='navbar navbar-expand-lg navbar-light'>

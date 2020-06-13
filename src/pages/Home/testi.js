@@ -4,7 +4,6 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import {
   Card,
-  CardMedia,
   CardActions,
   CardContent,
   CardActionArea,
