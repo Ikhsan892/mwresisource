@@ -32,18 +32,6 @@ function getSteps() {
 function getcontent(){
   return ['Membuka dalaman hp dengan hati hati', 'Menggan Lcd membutuhkan waktu 4 jam','ganti konektor mantap','masang lcd dan di lem ']
 }
-function complete(){
-  return ["true",'true','false',"false"];
-}
-function active(){
-  let active = complete()
-  let search = active.reduce((n,val) => {
-    return n + (val === 'true')
-  }
-    ,0)
-
-  return search+=1
-}
 
 export default function Progress() {
   const classes = useStyles();

@@ -3,6 +3,9 @@ import { makeStyles } from "@material-ui/styles";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import GetAppIcon from "@material-ui/icons/GetApp";
+import ImageIcon from '@material-ui/icons/Image';
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
+import PrintIcon from '@material-ui/icons/Print';
 import clsx from "clsx";
 import {
   Card,
@@ -11,28 +14,23 @@ import {
   Typography,
   Table,
   TableHead,
-  Button,
   TableBody,
   TableRow,
   TableCell,
   Box,
   colors,
 } from "@material-ui/core";
+import SpeedDial from '@material-ui/lab/SpeedDial';
+import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
   button: {
-    display: "block",
-    width: "50%",
-    color: "white",
-    marginLeft: "auto",
-    backgroundColor: "red",
-    marginRight: "auto",
-    marginTop: "30px",
-    marginBottom: "10px",
-    [theme.breakpoints.up("sm")]: {
-      width: "30%",
-    },
+      position: 'relative',
+      '&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
+        marginTop : '20px',
+        right: theme.spacing(10),
+      },
   },
   content: {
     padding: theme.spacing(6),
@@ -55,9 +53,21 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid " + colors.grey[100],
   },
 }));
-
+const actions = [
+  { icon: <ImageIcon />, name: 'Png' },
+  { icon: <PictureAsPdfIcon />, name: 'PDF' },
+  { icon: <PrintIcon />, name: 'Print' },
+];
 const Result = () => {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false)
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+  const handleOpen = () => {
+    setOpen(true)
+  }
   return (
     <div>
       <Card className={clsx(classes.root)}>
@@ -209,12 +219,24 @@ const Result = () => {
         </Box>
       </Card>
       <br />
-      <Button
-        variant='contained'
-        className={classes.button}
-        endIcon={<GetAppIcon />}>
-        Download as PDF
-      </Button>
+      <SpeedDial
+          ariaLabel="Download Options"
+          className={classes.button}
+          icon={<GetAppIcon />}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          open={open}
+          direction='Left'
+        >
+          {actions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={handleClose}
+            />
+          ))}
+        </SpeedDial>
     </div>
   );
 };
