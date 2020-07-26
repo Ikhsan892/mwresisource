@@ -33,8 +33,8 @@ const Result = () => {
         </Grid>
         <hr />
         <Grid item xs={12}>
-          <SingleRes Progress={<Progress/>}/>
-          {/* <DoubleRes ProgressDouble={<Progress/>}/> */}
+          {/* <SingleRes Progress={<Progress/>}/> */}
+          <DoubleRes ProgressDouble={<Progress/>}/>
         </Grid>
       </Grid>
     </div>

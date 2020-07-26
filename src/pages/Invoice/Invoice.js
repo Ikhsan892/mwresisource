@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import {
   TextField,
   LinearProgress,
@@ -7,7 +7,9 @@ import {
   Container,
 } from "@material-ui/core";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import GetAppIcon from "@material-ui/icons/GetApp";
 import { makeStyles } from "@material-ui/core/styles";
+import Fab from "@material-ui/core/Fab";
 const Result = lazy(() => import("./components/result"));
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -22,10 +24,13 @@ const useStyles = makeStyles((theme) => ({
       height: "200px",
     },
   },
-  div: {
-    width: theme.breakpoints.values.lg,
-    maxWidth: "100%",
-    margin: "0 auto",
+  buttonspeedial: {
+    position: "relative",
+    "&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft": {
+      marginTop: "20px",
+      right: theme.spacing(10),
+      zIndex: "1",
+    },
   },
   button: {
     display: "block",
@@ -38,21 +43,16 @@ const useStyles = makeStyles((theme) => ({
       width: "30%",
     },
   },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
 }));
-
 const Invoice = ({ carousel, mcarousel }) => {
   const classes = useStyles();
-  // const [value, setValue] = React.useState('')
-  // function useQuery() {
-  //   return new URLSearchParams(useLocation().search);
-  // }
-  // let query = useQuery()
-
-  // useEffect(() => {
-  //   if(query.get('resi')){
-  //     setValue(query.get('resi'))
-  //   }
-  // },[value])
+  const [down, setDown] = useState({clicked : false});
+  React.useEffect(() => {
+    console.log(down)
+  },[])
   return (
     <div>
       <Hidden smUp>
@@ -96,16 +96,24 @@ const Invoice = ({ carousel, mcarousel }) => {
           </Button>
         </form>
         <br />
-        <div className={classes.div}>
-          <Suspense
-            fallback={
-              <div>
-                <LinearProgress />
-              </div>
-            }>
-            <Result />
-          </Suspense>
-        </div>
+        <Suspense fallback={
+          <div>
+            <LinearProgress/>
+          </div>
+        }>
+          <Result />
+        </Suspense>
+        <Fab
+          onClick={() => {
+            setDown({clicked : true})
+          }}
+          variant='extended'
+          color='primary'
+          className={classes.button}
+          >
+          <GetAppIcon className={classes.extendedIcon} />
+          Download
+        </Fab>
       </Container>
     </div>
   );
