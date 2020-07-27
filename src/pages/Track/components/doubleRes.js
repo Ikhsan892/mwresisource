@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Typography, Hidden } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
@@ -43,13 +44,13 @@ const DoubleRes = ({ ProgressDouble }) => {
             <Hidden smDown>
               <Typography variant='h6' gutterbottom='true' align='center'>
                 <strong>Nama : </strong>
-                <span>Zia Urrahman Athaya</span>
+                <span>Muhammad Faris</span>
               </Typography>
             </Hidden>
             <Hidden mdUp>
               <Typography variant='body1' gutterbottom='true' align='center'>
                 <strong>Nama : </strong>
-                <span>Zia Urrahman Athaya</span>
+                <span>Muhammad Faris</span>
               </Typography>
             </Hidden>
           </Grid>
@@ -58,65 +59,53 @@ const DoubleRes = ({ ProgressDouble }) => {
         <div className={classes.div}>
           <div className={classes.gridInside}>
             <Grid container direction='column'>
-              <Grid item>
-                <Hidden smDown>
-                  <Typography variant='h6' gutterbottom='true'>
-                    <strong>Barang : </strong>
-                    <span>Xiaomi Redmi 5A</span>
-                  </Typography>
-                </Hidden>
-                <Hidden mdUp>
-                  <Typography variant='body1' gutterbottom='true'>
-                    <strong>Barang : </strong>
-                    <span>Xiaomi Redmi 5A</span>
-                  </Typography>
-                </Hidden>
-              </Grid>
-              <Grid item>
-                <Hidden smDown>
-                  <Typography variant='h6' gutterbottom='true'>
-                    <strong>Tanggal Masuk : </strong>
-                    <span>Rabu, 14 April 2020</span>
-                  </Typography>
-                </Hidden>
-                <Hidden mdUp>
-                  <Typography variant='body1' gutterbottom='true'>
-                    <strong>Tanggal Masuk : </strong>
-                    <span>Rabu, 14 April 2020</span>
-                  </Typography>
-                </Hidden>
-              </Grid>
-              <Grid item>
-                <Hidden smDown>
-                  <Typography variant='h6' gutterbottom='true'>
-                    <strong>Layanan : </strong>
-                    <span>Reguler Service</span>
-                  </Typography>
-                </Hidden>
-                <Hidden mdUp>
-                  <Typography variant='body1' gutterbottom='true'>
-                    <strong>Layanan : </strong>
-                    <span>Reguler Service</span>
-                  </Typography>
-                </Hidden>
-              </Grid>
-              <Grid item>
-                <Hidden smDown>
-                  <Typography variant='h6' gutterbottom='true'>
-                    <strong>Kerusakan : </strong>
-                    <ol>
-                      <li>Ganti Lcd Original Samsung 2017</li>
-                      <li>Ganti Oli</li>
-                      <li>Buka Pola Terkunci</li>
-                      <li>Ganti Speaker</li>
-                      <li>Ganti Fleksibel</li>
-                    </ol>
-                  </Typography>
-                </Hidden>
-                <Hidden mdUp>
-                  <Typography variant='body1' gutterbottom='true'>
-                    <strong>Kerusakan : </strong>
-                    <span>
+              <div style={{ height: "280px", overflow: "auto" }}>
+                <Grid item>
+                  <Hidden smDown>
+                    <Typography variant='h6' gutterbottom='true'>
+                      <strong>Barang : </strong>
+                      <span>Xiaomi Redmi 5A</span>
+                    </Typography>
+                  </Hidden>
+                  <Hidden mdUp>
+                    <Typography variant='body1' gutterbottom='true'>
+                      <strong>Barang : </strong>
+                      <span>Xiaomi Redmi 5A</span>
+                    </Typography>
+                  </Hidden>
+                </Grid>
+                <Grid item>
+                  <Hidden smDown>
+                    <Typography variant='h6' gutterbottom='true'>
+                      <strong>Tanggal Masuk : </strong>
+                      <span>Rabu, 14 April 2020</span>
+                    </Typography>
+                  </Hidden>
+                  <Hidden mdUp>
+                    <Typography variant='body1' gutterbottom='true'>
+                      <strong>Tanggal Masuk : </strong>
+                      <span>Rabu, 14 April 2020</span>
+                    </Typography>
+                  </Hidden>
+                </Grid>
+                <Grid item>
+                  <Hidden smDown>
+                    <Typography variant='h6' gutterbottom='true'>
+                      <strong>Layanan : </strong>
+                      <span>Reguler Service</span>
+                    </Typography>
+                  </Hidden>
+                  <Hidden mdUp>
+                    <Typography variant='body1' gutterbottom='true'>
+                      <strong>Layanan : </strong>
+                      <span>Reguler Service</span>
+                    </Typography>
+                  </Hidden>
+                </Grid>
+                <Grid item>
+                  <Hidden smDown>
+                    <Typography variant='h6' gutterbottom='true'>
+                      <strong>Kerusakan : </strong>
                       <ol>
                         <li>Ganti Lcd Original Samsung 2017</li>
                         <li>Ganti Oli</li>
@@ -124,10 +113,24 @@ const DoubleRes = ({ ProgressDouble }) => {
                         <li>Ganti Speaker</li>
                         <li>Ganti Fleksibel</li>
                       </ol>
-                    </span>
-                  </Typography>
-                </Hidden>
-              </Grid>
+                    </Typography>
+                  </Hidden>
+                  <Hidden mdUp>
+                    <Typography variant='body1' gutterbottom='true'>
+                      <strong>Kerusakan : </strong>
+                      <span>
+                        <ol>
+                          <li>Ganti Lcd Original Samsung 2017</li>
+                          <li>Ganti Oli</li>
+                          <li>Buka Pola Terkunci</li>
+                          <li>Ganti Speaker</li>
+                          <li>Ganti Fleksibel</li>
+                        </ol>
+                      </span>
+                    </Typography>
+                  </Hidden>
+                </Grid>
+              </div>
               <Grid item>
                 <Hidden smDown>
                   <Typography variant='h6' gutterbottom='true'>
@@ -146,74 +149,162 @@ const DoubleRes = ({ ProgressDouble }) => {
 
           <div className={classes.gridInside}>
             <Grid container direction='column'>
-              <Grid item>
-                <Hidden smDown>
-                  <Typography variant='h6' gutterbottom='true'>
-                    <strong>Barang : </strong>
-                    <span>Vivo Y91</span>
-                  </Typography>
-                </Hidden>
-                <Hidden mdUp>
-                  <Typography variant='body1' gutterbottom='true'>
-                    <strong>Barang : </strong>
-                    <span>Vivo Y91</span>
-                  </Typography>
-                </Hidden>
-              </Grid>
-              <Grid item>
-                <Hidden smDown>
-                  <Typography variant='h6' gutterbottom='true'>
-                    <strong>Tanggal Masuk : </strong>
-                    <span>Kamis, 15 April 2020</span>
-                  </Typography>
-                </Hidden>
-                <Hidden mdUp>
-                  <Typography variant='body1' gutterbottom='true'>
-                    <strong>Tanggal Masuk : </strong>
-                    <span>Kamis, 15 April 2020</span>
-                  </Typography>
-                </Hidden>
-              </Grid>
-              <Grid item>
-                <Hidden smDown>
-                  <Typography variant='h6' gutterbottom='true'>
-                    <strong>Layanan : </strong>
-                    <span>Express Service</span>
-                  </Typography>
-                </Hidden>
-                <Hidden mdUp>
-                  <Typography variant='body1' gutterbottom='true'>
-                    <strong>Layanan : </strong>
-                    <span>Express Service</span>
-                  </Typography>
-                </Hidden>
-              </Grid>
-              <Grid item>
-                <Hidden smDown>
-                  <Typography variant='h6' gutterbottom='true'>
-                    <strong>Kerusakan : </strong>
-                    <ol>
-                      <li>Ganti Lcd Original Vivo</li>
-                      <li>Ganti Speaker</li>
-                      <li>Buka Pola Terkunci</li>
-                      <li>Ganti Fleksibel</li>
-                    </ol>
-                  </Typography>
-                </Hidden>
-                <Hidden mdUp>
-                  <Typography variant='body1' gutterbottom='true'>
-                    <strong>Kerusakan : </strong>
-                    <span>
+              <div style={{ height: "280px", overflow: "auto" }}>
+                <Grid item>
+                  <Hidden smDown>
+                    <Typography variant='h6' gutterbottom='true'>
+                      <strong>Barang : </strong>
+                      <span>Vivo Y91</span>
+                    </Typography>
+                  </Hidden>
+                  <Hidden mdUp>
+                    <Typography variant='body1' gutterbottom='true'>
+                      <strong>Barang : </strong>
+                      <span>Vivo Y91</span>
+                    </Typography>
+                  </Hidden>
+                </Grid>
+                <Grid item>
+                  <Hidden smDown>
+                    <Typography variant='h6' gutterbottom='true'>
+                      <strong>Tanggal Masuk : </strong>
+                      <span>Kamis, 15 April 2020</span>
+                    </Typography>
+                  </Hidden>
+                  <Hidden mdUp>
+                    <Typography variant='body1' gutterbottom='true'>
+                      <strong>Tanggal Masuk : </strong>
+                      <span>Kamis, 15 April 2020</span>
+                    </Typography>
+                  </Hidden>
+                </Grid>
+                <Grid item>
+                  <Hidden smDown>
+                    <Typography variant='h6' gutterbottom='true'>
+                      <strong>Layanan : </strong>
+                      <span>Express Service</span>
+                    </Typography>
+                  </Hidden>
+                  <Hidden mdUp>
+                    <Typography variant='body1' gutterbottom='true'>
+                      <strong>Layanan : </strong>
+                      <span>Express Service</span>
+                    </Typography>
+                  </Hidden>
+                </Grid>
+                <Grid item>
+                  <Hidden smDown>
+                    <Typography variant='h6' gutterbottom='true'>
+                      <strong>Kerusakan : </strong>
                       <ol>
                         <li>Ganti Lcd Original Vivo</li>
                         <li>Ganti Speaker</li>
                         <li>Buka Pola Terkunci</li>
-                        <li>Ganti Fleksibel</li>
                       </ol>
-                    </span>
+                    </Typography>
+                  </Hidden>
+                  <Hidden mdUp>
+                    <Typography variant='body1' gutterbottom='true'>
+                      <strong>Kerusakan : </strong>
+                      <span>
+                        <ol>
+                          <li>Ganti Lcd Original Vivo</li>
+                          <li>Ganti Speaker</li>
+                          <li>Buka Pola Terkunci</li>
+                        </ol>
+                      </span>
+                    </Typography>
+                  </Hidden>
+                </Grid>
+              </div>
+              {/* ini terakhir */}
+              <Grid item>
+                <Hidden smDown>
+                  <Typography variant='h6' gutterbottom='true'>
+                    <strong>Status : </strong>
                   </Typography>
                 </Hidden>
+                <Hidden mdUp>
+                  <Typography variant='body1' gutterbottom='true'>
+                    <strong>Status : </strong>
+                  </Typography>
+                </Hidden>
+                {ProgressDouble}
               </Grid>
+            </Grid>
+          </div>
+
+          <div className={classes.gridInside}>
+            <Grid container direction='column'>
+              <div style={{ height: "280px", overflow: "auto" }}>
+                <Grid item>
+                  <Hidden smDown>
+                    <Typography variant='h6' gutterbottom='true'>
+                      <strong>Barang : </strong>
+                      <span>Vivo Y91</span>
+                    </Typography>
+                  </Hidden>
+                  <Hidden mdUp>
+                    <Typography variant='body1' gutterbottom='true'>
+                      <strong>Barang : </strong>
+                      <span>Vivo Y91</span>
+                    </Typography>
+                  </Hidden>
+                </Grid>
+                <Grid item>
+                  <Hidden smDown>
+                    <Typography variant='h6' gutterbottom='true'>
+                      <strong>Tanggal Masuk : </strong>
+                      <span>Kamis, 15 April 2020</span>
+                    </Typography>
+                  </Hidden>
+                  <Hidden mdUp>
+                    <Typography variant='body1' gutterbottom='true'>
+                      <strong>Tanggal Masuk : </strong>
+                      <span>Kamis, 15 April 2020</span>
+                    </Typography>
+                  </Hidden>
+                </Grid>
+                <Grid item>
+                  <Hidden smDown>
+                    <Typography variant='h6' gutterbottom='true'>
+                      <strong>Layanan : </strong>
+                      <span>Express Service</span>
+                    </Typography>
+                  </Hidden>
+                  <Hidden mdUp>
+                    <Typography variant='body1' gutterbottom='true'>
+                      <strong>Layanan : </strong>
+                      <span>Express Service</span>
+                    </Typography>
+                  </Hidden>
+                </Grid>
+                <Grid item>
+                  <Hidden smDown>
+                    <Typography variant='h6' gutterbottom='true'>
+                      <strong>Kerusakan : </strong>
+                      <ol>
+                        <li>Ganti Lcd Original Vivo</li>
+                        <li>Ganti Speaker</li>
+                        <li>Buka Pola Terkunci</li>
+                      </ol>
+                    </Typography>
+                  </Hidden>
+                  <Hidden mdUp>
+                    <Typography variant='body1' gutterbottom='true'>
+                      <strong>Kerusakan : </strong>
+                      <span>
+                        <ol>
+                          <li>Ganti Lcd Original Vivo</li>
+                          <li>Ganti Speaker</li>
+                          <li>Buka Pola Terkunci</li>
+                        </ol>
+                      </span>
+                    </Typography>
+                  </Hidden>
+                </Grid>
+              </div>
+              {/* ini terakhir */}
               <Grid item>
                 <Hidden smDown>
                   <Typography variant='h6' gutterbottom='true'>
@@ -236,7 +327,9 @@ const DoubleRes = ({ ProgressDouble }) => {
               variant='outlined'
               color='primary'
               className={classes.button}
-              endIcon={<ArrowForwardIcon />}>
+              endIcon={<ArrowForwardIcon />}
+              component={Link}
+              to='/invoice'>
               Cek Invoice-mu Langsung
             </Button>
           </Grid>

@@ -18,6 +18,9 @@ const Home = lazy(() => import("./pages/Home"));
 const Track = lazy(() => import("./pages/Track"));
 const Invoice = lazy(() => import("./pages/Invoice"));
 const Information = lazy(() => import("./pages/Information"));
+const InformationDetail = lazy(() =>
+  import("./pages/Information/InformationDetail")
+);
 const Error = lazy(() => import("./pages/Error"));
 function App() {
   const [dark, setDark] = useState(false);
@@ -78,9 +81,12 @@ function App() {
                                 mcarousel={<MCarousel />}
                               />
                             </Route>
-                            {/* <Route path='*'>
+                            {/* <Route path='/details'>
                               <Error />
                             </Route> */}
+                            <Route path='/details/:slug'>
+                              <InformationDetail />
+                            </Route>
                           </ScopedCssBaseline>
                         </Suspense>
                       </Switch>

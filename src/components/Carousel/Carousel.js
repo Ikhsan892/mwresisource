@@ -18,7 +18,7 @@ const tutorialSteps = [
   },
   {
     label: "Bird",
-    link: "https://instagram.com",
+    link: "http://localhost:3000/details/create-slug",
     imgPath: "/assets/banner2.jpg",
   },
   {
