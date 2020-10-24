@@ -1,112 +1,132 @@
 import React from "react";
-import { Grid, Typography, Hidden, Button } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  Collapse,
+  Grid,
+  Hidden,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  ListItemIcon,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
-
+import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
+import DeviceUnknownIcon from "@material-ui/icons/DeviceUnknown";
+import TodayIcon from "@material-ui/icons/Today";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import { Link } from "react-router-dom";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import ErrorIcon from "@material-ui/icons/Error";
+import WorkIcon from "@material-ui/icons/Work";
+import { useSelector, useDispatch } from "react-redux";
+import { Progress } from "./index";
+import { getResiData } from "../../../actions";
+//../../actions
 const useStyles = makeStyles((theme) => ({
   grid: {
-    marginTop: "5px",
+    marginTop: "50px",
     marginBottom: "5px",
   },
   grid2: {
-    marginTop: "5px",
-    marginBottom: "5px",
-    borderBottom: "0.5px dashed",
+    marginBottom: "10px",
+  },
+  biru: {
+    backgroundColor: theme.palette.primary.main,
+    color: "#fff",
+  },
+  nested: {
+    paddingLeft: theme.spacing(6),
   },
 }));
 
-const SingleRes = ({ Progress }) => {
+const SingleRes = () => {
   const classes = useStyles();
+  const [kebuka, setKebuka] = React.useState(false);
+  const { data } = useSelector((state) => state.track);
+  const dispatch = useDispatch();
+  const {
+    customer,
+    no_resi,
+    barang: {
+      0: { barang, tanggal_masuk, layanan, kerusakan, status, active_status },
+    },
+  } = data;
+  const handleClick = () => {
+    setKebuka(!kebuka);
+  };
   return (
     <div>
-      <Grid container>
+      <Grid container justify='center'>
         <Grid item xs={6} className={classes.grid}>
-          <Hidden smDown>
-            <Typography variant='h6' gutterbottom='true'>
-              <strong>Nama : </strong>
-              <span>Muhammad Fatihul Ikhsan</span>
-            </Typography>
-          </Hidden>
-          <Hidden mdUp>
-            <Typography variant='body1' gutterbottom='true'>
-              <strong>Nama : </strong>
-              <span>Muhammad Fatihul Ikhsan</span>
-            </Typography>
-          </Hidden>
+          <List>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar className={classes.biru}>
+                  <AccountCircleOutlinedIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={customer} secondary='Nama' />
+            </ListItem>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar className={classes.biru}>
+                  <DeviceUnknownIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={barang} secondary='Barang' />
+            </ListItem>
+            <ListItem button onClick={handleClick}>
+              <ListItemAvatar>
+                <Avatar className={classes.biru}>
+                  <ErrorIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary='Kerusakan' />
+              {kebuka ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse in={kebuka} timeout='auto'>
+              <List component='div' disablePadding>
+                {kerusakan.map((v, index) => {
+                  return (
+                    <ListItem className={classes.nested}>
+                      <ListItemIcon>
+                        <ArrowForwardIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={v} />
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </Collapse>
+          </List>
         </Grid>
         <Grid item xs={6} className={classes.grid}>
-          <Hidden smDown>
-            <Typography variant='h6' gutterbottom='true'>
-              <strong>Tanggal Masuk : </strong>
-              <span>Rabu, 14 April 2020</span>
-            </Typography>
-          </Hidden>
-          <Hidden mdUp>
-            <Typography variant='body1' gutterbottom='true'>
-              <strong>Tanggal Masuk : </strong>
-              <span>Rabu, 14 April 2020</span>
-            </Typography>
-          </Hidden>
-        </Grid>
-        <Grid item xs={6} className={classes.grid}>
-          <Hidden smDown>
-            <Typography variant='h6' gutterbottom='true'>
-              <strong>Barang : </strong>
-              <span>Xiaomi Redmi 5A</span>
-            </Typography>
-          </Hidden>
-          <Hidden mdUp>
-            <Typography variant='body1' gutterbottom='true'>
-              <strong>Barang : </strong>
-              <span>Xiaomi Redmi 5A</span>
-            </Typography>
-          </Hidden>
-        </Grid>
-        <Grid item xs={6} className={classes.grid}>
-          <Hidden smDown>
-            <Typography variant='h6' gutterbottom='true'>
-              <strong>Layanan : </strong>
-              <span>Reguler Service</span>
-            </Typography>
-          </Hidden>
-          <Hidden mdUp>
-            <Typography variant='body1' gutterbottom='true'>
-              <strong>Layanan : </strong>
-              <span>Reguler Service</span>
-            </Typography>
-          </Hidden>
+          <List>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar className={classes.biru}>
+                  <TodayIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={tanggal_masuk} secondary='Tanggal Masuk' />
+            </ListItem>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar className={classes.biru}>
+                  <WorkIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={layanan} secondary='Layanan' />
+            </ListItem>
+          </List>
         </Grid>
         <Grid item xs={12} className={classes.grid2}>
           <Hidden smDown>
             <Typography variant='h6' gutterbottom='true'>
-              <strong>Kerusakan : </strong>
-              <ol>
-                <li>Ganti Lcd Original Samsung 2017</li>
-                <li>Ganti Oli</li>
-                <li>Buka Pola Terkunci</li>
-                <li>Ganti Speaker</li>
-                <li>Ganti Fleksibel</li>
-              </ol>
-            </Typography>
-          </Hidden>
-          <Hidden mdUp>
-            <Typography variant='body1' gutterbottom='true'>
-              <strong>Kerusakan : </strong>
-              <span>
-                <ol>
-                  <li>Ganti Lcd Original Samsung 2017</li>
-                  <li>Ganti Oli</li>
-                  <li>Buka Pola Terkunci</li>
-                  <li>Ganti Speaker</li>
-                  <li>Ganti Fleksibel</li>
-                </ol>
-              </span>
-            </Typography>
-          </Hidden>
-        </Grid>
-        <Grid item xs={12}>
-          <Hidden smDown>
-            <Typography variant='h6' gutterbottom='true'>
               <strong>Status : </strong>
             </Typography>
           </Hidden>
@@ -115,15 +135,21 @@ const SingleRes = ({ Progress }) => {
               <strong>Status : </strong>
             </Typography>
           </Hidden>
-          {Progress}
+          <Progress status={status} active={active_status} />
         </Grid>
         <Grid item xs={12}>
           <Grid container justify='center'>
             <Button
               variant='outlined'
               color='primary'
+              component={Link}
+              to='/invoice'
+              onClick={() => {
+                dispatch(getResiData(no_resi));
+              }}
               className={classes.button}
               endIcon={<ArrowForwardIcon />}>
+              {" "}
               Cek Invoice-mu Langsung
             </Button>
           </Grid>

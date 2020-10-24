@@ -1,7 +1,9 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { useEffect, lazy, Suspense, useCallback } from "react";
 import "./App.css";
 import Blue from "@material-ui/core/colors/blue";
 import DarkToggle from "./components/DarkToggle";
+import { useSelector, useDispatch } from "react-redux";
+import { getlayoutdata } from "./actions";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline";
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -21,19 +23,22 @@ const Information = lazy(() => import("./pages/Information"));
 const InformationDetail = lazy(() =>
   import("./pages/Information/InformationDetail")
 );
-const Error = lazy(() => import("./pages/Error"));
+// const Error = lazy(() => import("./pages/Error"));
 function App() {
-  const [dark, setDark] = useState(false);
+  const { dark } = useSelector((state) => state.dark);
+  const dispatch = useDispatch();
   const mainTheme = createMuiTheme({
     palette: {
-      // primary : Blue
       type: dark ? "dark" : "light",
       primary: Blue,
     },
   });
-  const toggle = () => {
-    setDark(!dark);
-  };
+  const loadfirst = useCallback(() => {
+    dispatch(getlayoutdata());
+  }, []);
+  useEffect(() => {
+    loadfirst();
+  }, []);
   return (
     <React.Fragment>
       <ThemeProvider theme={mainTheme}>
@@ -47,7 +52,7 @@ function App() {
                   </div>
                 }>
                 <ScopedCssBaseline>
-                  <Layout toggle={<DarkToggle check={dark} click={toggle} />}>
+                  <Layout toggle={<DarkToggle />}>
                     <ScopedCssBaseline>
                       <Switch>
                         <Suspense
@@ -57,6 +62,9 @@ function App() {
                             </div>
                           }>
                           <ScopedCssBaseline>
+                            {/* <Route path='*'>
+                              <Error />
+                            </Route> */}
                             <Route exact path='/'>
                               <Redirect to='/home' />
                             </Route>
@@ -81,9 +89,6 @@ function App() {
                                 mcarousel={<MCarousel />}
                               />
                             </Route>
-                            {/* <Route path='/details'>
-                              <Error />
-                            </Route> */}
                             <Route path='/details/:slug'>
                               <InformationDetail />
                             </Route>

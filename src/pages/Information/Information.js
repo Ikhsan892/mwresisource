@@ -1,10 +1,9 @@
-import React, { Suspense } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import {
   Hidden,
   Grid,
-  CircularProgress,
   Card,
   CardMedia,
   CardActions,
@@ -12,138 +11,25 @@ import {
   CardActionArea,
   Typography,
   TextField,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
   Button,
   Container,
 } from "@material-ui/core";
+import Skeleton from "@material-ui/lab/Skeleton";
 import { makeStyles } from "@material-ui/core/styles";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-
-const informations = [
-  {
-    id: 1,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-  {
-    id: 2,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-  {
-    id: 3,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-  {
-    id: 4,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-  {
-    id: 5,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-  {
-    id: 6,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-  {
-    id: 7,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-  {
-    id: 8,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-
-  {
-    id: 9,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-  {
-    id: 10,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-  {
-    id: 11,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-  {
-    id: 12,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-  {
-    id: 13,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-  {
-    id: 14,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-  {
-    id: 15,
-    media: "/assets/mbanner3.jpg",
-    headline: "Cara Transfer",
-    content:
-      "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except antarctica",
-    slug: "create-slug",
-  },
-];
+import { Helmet } from "react-helmet";
+import { useDispatch, useSelector } from "react-redux";
+import { getBlogData, getCategoryData } from "../../actions";
+const Pagination = lazy(() => import("./components/Pagination"));
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+    minWidth: 345,
+    minHeight: 350,
+    maxHeight: 350,
   },
   media: {
     height: 140,
@@ -152,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     marginTop: "5px",
     marginRight: "auto",
+    borderRadius: "20px 20px",
     marginLeft: "auto",
     width: "400px",
     height: "400px",
@@ -174,43 +61,49 @@ const useStyles = makeStyles((theme) => ({
       width: "30%",
     },
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
 }));
 const Information = ({ carousel, mcarousel }) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [options, setOptions] = React.useState([]);
+  const { blog_loading, category_loading } = useSelector(
+    (state) => state.loading
+  );
+  const { data, status, message } = useSelector((state) => state.blog);
+  const { category_lists } = useSelector((state) => state.category);
+  const dispatch = useDispatch();
   const [inputValue, setInputValue] = React.useState("");
-  const loading = open && options.length === 0;
-
-  React.useEffect(() => {
-    let active = true;
-
-    if (!loading) {
-      return undefined;
-    }
-
-    (async () => {
-      const response = await fetch(
-        "https://country.register.gov.uk/records.json?page-size=5000"
-      );
-      const countries = await response.json();
-      if (active) {
-        setOptions(Object.keys(countries).map((key) => countries[key].item[0]));
-      }
-    })();
-
-    return () => {
-      active = false;
-    };
-  }, [loading]);
-
-  React.useEffect(() => {
-    if (!open) {
-      setOptions([]);
-    }
-  }, [open]);
+  const [currentStep, setCurrentStep] = React.useState(0);
+  const [selected, setSelected] = React.useState("");
+  const [postPerPage, setPostPerPage] = React.useState(6);
+  const handleCurrentPage = (value) => setCurrentStep(value - 1);
+  useEffect(() => {
+    dispatch(getBlogData());
+    dispatch(getCategoryData());
+  }, []);
+  const extractContent = (s) => {
+    var span = document.createElement("span");
+    span.innerHTML = s;
+    return span.textContent || span.innerText;
+  };
+  const handleChange = (event) => {
+    dispatch(getBlogData("null", event.target.value));
+    setSelected(event.target.value);
+  };
+  const postsArray = (data) => {
+    const offsetawal = currentStep * postPerPage;
+    const offsetakhir = currentStep * postPerPage + postPerPage;
+    return data.slice(offsetawal, offsetakhir);
+  };
   return (
     <div>
+      <Helmet>
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta name='description' content='Cari Informasi Disini' />
+        <title>Makersware Service Center - Cari Informasi Disini</title>
+      </Helmet>
       <Hidden smUp>
         <Suspense fallback={<div>Loading...</div>}>{mcarousel}</Suspense>
       </Hidden>
@@ -232,95 +125,148 @@ const Information = ({ carousel, mcarousel }) => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            alert("submit");
+            dispatch(getBlogData(inputValue, "null"));
           }}
           autoComplete='off'>
-          <Autocomplete
+          <TextField
             id='outlined-basic'
-            style={{
-              boxSizing: "content-box",
-            }}
-            onChange={(event, newValue) => setInputValue(newValue.name)}
-            className={classes.button}
-            open={open}
-            onOpen={() => {
-              setOpen(true);
-            }}
-            onClose={() => {
-              setOpen(false);
-            }}
-            getOptionSelected={(option, value) => {
-              return option.name === value.name;
-            }}
-            getOptionLabel={(option) => option.name}
-            options={options}
-            loading={loading}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                fullWidth
-                label='Cari Informasimu Disini'
-                variant='outlined'
-                InputProps={{
-                  ...params.InputProps,
-                  endAdornment: (
-                    <React.Fragment>
-                      {loading ? (
-                        <CircularProgress color='inherit' size={20} />
-                      ) : null}
-                      {params.InputProps.endAdornment}
-                    </React.Fragment>
-                  ),
-                }}
-              />
-            )}
+            style={{ boxSizing: "content-box" }}
+            placeholder='Cari Informasi disini'
+            onChange={(e) => setInputValue(e.target.value)}
+            variant='outlined'
+            fullWidth
           />
           <br />
           <Button
             variant='contained'
+            type='submit'
             color='primary'
-            onClick={() => alert(inputValue)}
             className={classes.button}>
             CARI
           </Button>
         </form>
         <hr />
-        <Grid container spacing={4} justify='center'>
-          {informations.map((p) => {
-            return (
-              <Grid item key={p.id}>
-                <Card className={classes.root}>
-                  <CardActionArea>
-                    <CardMedia
-                      className={classes.media}
-                      image={p.media}
-                      title='Contemplative Reptile'
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant='h5' component='h2'>
-                        {p.headline}
-                      </Typography>
-                      <Typography
-                        variant='body2'
-                        color='textSecondary'
-                        component='p'>
-                        {`${p.content.slice(0, 100)}...`}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button
-                      size='small'
-                      color='primary'
-                      component={Link}
-                      to={`/details/${p.slug}`}>
-                      Baca Lengkap
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            );
-          })}
+        <Grid
+          container
+          justify='space-between'
+          style={{
+            marginBottom: 10,
+          }}>
+          <Grid item>
+            {blog_loading ? (
+              <Skeleton variant='rect' width={150} />
+            ) : status === 200 ? (
+              <Typography
+                variant='subtitle2'
+                gutterbottom
+                style={{ marginBottom: "20px" }}>
+                Menampilkan : {postPerPage} dari {data.length} artikel
+              </Typography>
+            ) : (
+              ""
+            )}
+          </Grid>
+          <Grid
+            item
+            style={{
+              boxSizing: "content-box",
+            }}>
+            {category_loading ? (
+              <Skeleton variant='rect' width={100} />
+            ) : (
+              <FormControl className={classes.formControl}>
+                <InputLabel id='category'>Category</InputLabel>
+                <Select
+                  labelId='category'
+                  id='category'
+                  value={selected}
+                  onChange={handleChange}>
+                  <MenuItem value='null'>Semua</MenuItem>
+                  {category_lists.data.map((i) => {
+                    return <MenuItem value={i}>{i}</MenuItem>;
+                  })}
+                </Select>
+              </FormControl>
+            )}
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          spacing={4}
+          justify='center'
+          style={{ marginBottom: "20px" }}>
+          {blog_loading
+            ? [1, 2, 3, 4, 5, 6].map(() => {
+                return (
+                  <Grid item>
+                    <Skeleton variant='rect' width={345} height={350} />
+                  </Grid>
+                );
+              })
+            : status === 200
+            ? postsArray(data).map((p) => {
+                return (
+                  <Grid item key={p.id}>
+                    <Card className={classes.root}>
+                      <CardActionArea>
+                        <CardMedia
+                          className={classes.media}
+                          image={p.image_heading}
+                          title='Contemplative Reptile'
+                        />
+                        <CardContent>
+                          <Typography
+                            gutterBottom
+                            variant='h5'
+                            component='h2'
+                            noWrap='true'>
+                            {p.title}
+                          </Typography>
+                          <Typography gutterBottom variant='overline'>
+                            {p.category}
+                          </Typography>
+                          <Typography
+                            variant='body2'
+                            color='textSecondary'
+                            component='p'>
+                            {extractContent(p.preview)}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                      <CardActions>
+                        <Button
+                          size='small'
+                          color='primary'
+                          component={Link}
+                          to={`/details/${p.slug}`}>
+                          Baca Lengkap
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                );
+              })
+            : ""}
+        </Grid>
+        <Grid container justify='center'>
+          <Suspense fallback={<div>Loading..</div>}>
+            {blog_loading ? (
+              <React.Fragment>
+                <Skeleton variant='circle' height={30} width={30} />
+                <Skeleton variant='circle' height={30} width={30} />
+                <Skeleton variant='circle' height={30} width={30} />
+                <Skeleton variant='circle' height={30} width={30} />
+              </React.Fragment>
+            ) : status === 200 ? (
+              <Pagination
+                postPerPage={postPerPage}
+                totalPost={data.length}
+                paginate={handleCurrentPage}
+              />
+            ) : (
+              message
+            )}
+          </Suspense>
         </Grid>
       </Container>
     </div>

@@ -29,12 +29,12 @@ const Nodata = () => {
       />
       <Hidden smDown>
         <h2 className={classes.h2}>
-          Ketik Pencarianmu nanti hasil akan muncul
+          Ketik Pencarianmu Nanti Hasil akan muncul
         </h2>
       </Hidden>
       <Hidden mdUp>
         <h4 className={classes.h2}>
-          Ketik Pencarianmu nanti hasil akan muncul
+          Ketik Pencarianmu Nanti Hasil akan muncul
         </h4>
       </Hidden>
     </div>

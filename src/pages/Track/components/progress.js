@@ -1,16 +1,17 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-  Stepper,
-  Step,
-  StepLabel,
-  StepContent,
-  Typography
-} from '@material-ui/core';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
+import Timeline from "@material-ui/lab/Timeline";
+import TimelineItem from "@material-ui/lab/TimelineItem";
+import TimelineSeparator from "@material-ui/lab/TimelineSeparator";
+import TimelineConnector from "@material-ui/lab/TimelineConnector";
+import TimelineContent from "@material-ui/lab/TimelineContent";
+import TimelineDot from "@material-ui/lab/TimelineDot";
+import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
   },
   button: {
     marginTop: theme.spacing(1),
@@ -22,33 +23,39 @@ const useStyles = makeStyles((theme) => ({
   resetContainer: {
     padding: theme.spacing(3),
   },
+  secondaryTail: {
+    backgroundColor: theme.palette.primary.main,
+  },
 }));
-function getDates(){
-  return ['20 Maret 2020', '20 Maret 2020', '21 Maret 2020', '21 Maret 2020'];
-}
-function getSteps() {
-  return ['Membongkar HP', 'Penggantian Lcd', 'Ganti Konektor', 'Pemasangan Lcd'];
-}
-function getcontent(){
-  return ['Membuka dalaman hp dengan hati hati', 'Menggan Lcd membutuhkan waktu 4 jam','ganti konektor mantap','masang lcd dan di lem ']
-}
-
-export default function Progress() {
+export default function Progress({ status, active }) {
   const classes = useStyles();
-  const [activeStep] = React.useState(3);
-  const steps = getSteps();
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((label, index) => (
-          <Step key={label}>
-            <StepLabel optional={<Typography variant="caption">{getDates()[index]} - <span>(2 jam yang lalu)</span></Typography>}>{label}</StepLabel>
-            <StepContent>
-              {getcontent()[index]}
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
+      <Timeline align='alternate'>
+        {status.map((item, index) => {
+          return (
+            <TimelineItem key={item}>
+              <TimelineOppositeContent>
+                <Typography color='textSecondary'>
+                  <small>{item.created_diff}</small>
+                </Typography>
+              </TimelineOppositeContent>
+              <TimelineSeparator>
+                <TimelineDot color={index === 0 ? "primary" : "grey"} />
+                <TimelineConnector
+                  className={index === 0 ? classes.secondaryTail : ""}
+                />
+              </TimelineSeparator>
+              <TimelineContent>
+                <Typography>
+                  <strong>{item.nama_status}</strong>
+                </Typography>
+                <div>{item.deskripsi_status}</div>
+              </TimelineContent>
+            </TimelineItem>
+          );
+        })}
+      </Timeline>
     </div>
   );
 }

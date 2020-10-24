@@ -7,37 +7,10 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { autoPlay } from "react-swipeable-views-utils";
+import { useSelector } from "react-redux";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-
-const tutorialSteps = [
-  {
-    label: "San Francisco – Oakland Bay Bridge, United States",
-    link: "https://instagram.com",
-    imgPath: "/assets/banner1.jpg",
-  },
-  {
-    label: "Bird",
-    link: "http://localhost:3000/details/create-slug",
-    imgPath: "/assets/banner2.jpg",
-  },
-  {
-    label: "Bali, Indonesia",
-    link: "https://instagram.com",
-    imgPath: "/assets/banner3.jpg",
-  },
-  {
-    label: "NeONBRAND Digital Marketing, Las Vegas, United States",
-    link: "https://instagram.com",
-    imgPath: "/assets/banner4.jpg",
-  },
-  {
-    label: "Goč, Serbia",
-    link: "https://instagram.com",
-    imgPath: "/assets/banner5.jpg",
-  },
-];
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -64,8 +37,10 @@ const useStyles = makeStyles((theme) => ({
 function Carousel() {
   const classes = useStyles();
   const theme = useTheme();
+  const { carousel } = useSelector((state) => state.layout);
+  const { layout_loading } = useSelector((state) => state.loading);
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = tutorialSteps.length;
+  const maxSteps = carousel.length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -86,19 +61,23 @@ function Carousel() {
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents>
-        {tutorialSteps.map((step, index) => (
-          <div key={step.label}>
-            {Math.abs(activeStep - index) <= 2 ? (
-              <a href={step.link} target='__blank' rel='noreferrer'>
-                <LazyLoadImage
-                  className={classes.img}
-                  src={step.imgPath}
-                  alt={step.label}
-                />
-              </a>
-            ) : null}
-          </div>
-        ))}
+        {layout_loading ? (
+          <Skeleton variant='rect' height={375} animation='wave' />
+        ) : (
+          carousel.map((step, index) => (
+            <div key={step.label}>
+              {Math.abs(activeStep - index) <= 2 ? (
+                <a href={step.link} target='__blank' rel='noreferrer'>
+                  <LazyLoadImage
+                    className={classes.img}
+                    src={step.imgPath}
+                    alt={step.label}
+                  />
+                </a>
+              ) : null}
+            </div>
+          ))
+        )}
       </AutoPlaySwipeableViews>
       <MobileStepper
         steps={maxSteps}

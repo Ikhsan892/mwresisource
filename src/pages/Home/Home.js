@@ -1,120 +1,96 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios'
+import React from "react";
 import { Grid } from "@material-ui/core";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-// import { makeStyles } from "@material-ui/core/styles";
-import "./bootstrap.min.css";
-import "./Home.css";
+import { makeStyles } from "@material-ui/core/styles";
 import Check from "@material-ui/icons/Check";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import Testi from "./testi";
-// const useStyles = makeStyles((theme) => ({
-//   root: {},
-//   card: {
-//     maxWidth: "345px",
-//     paddingTop: "40px",
-//   },
-//   navbarlogo: {
-//     color: "white",
-//     left: 20,
-//     letterSpacing: "2px",
-//     float: "left",
-//     paddingLeft: "100px",
-//     // textAlign:'center',
-//     lineHeight: "60px",
-//   },
-//   nav: {
-//     height: "70px",
-//     background: "transparent",
-//     borderBottom: "2px solid #fff",
-//     zIndex: "1",
-//   },
-//   ul: {
-//     color: "#fff",
-//     float: "right",
-//     width: "500px",
-//     paddingRight: "70px",
-//     display: "flex",
-//     zIndex: 0,
-//     listStyle: "none",
-//     lineHeight: "60px",
-//     justifyContent: "space-around",
-//   },
-//   imagecenter: {
-//     margin: "0 auto",
-//   },
-//   li: {
-//     fontSize: "15px",
-//     letterSpacing: "0.5px",
-//     textDecoration: "none",
-//     color: "#fff",
-//     [theme.breakpoints.down("sm")]: {
-//       display: "none",
-//     },
-//     "&:hover": {
-//       borderBottom: "1px solid #fff",
-//       transition: "0.3s",
-//     },
-//   },
-// }));
+import { useSelector } from "react-redux";
+import Skeleton from "@material-ui/lab/Skeleton";
+
+const useStyles = makeStyles((theme) => ({
+  herobanner: {
+    background: (image) => `url("${image.back}") center no-repeat`,
+  },
+  topimageheader: {
+    height: "50px",
+    filter: "invert(100%)",
+  },
+  centerImage: {
+    [theme.breakpoints.down("sm")]: {
+      display: "block",
+      marginLeft: "auto",
+      marginRight: "auto",
+    },
+  },
+  bordernav: {
+    border: "2px solid white",
+    display: "flex",
+    paddingRight: "20px",
+    paddingLeft: "20px",
+    borderRadius: "50px",
+  },
+}));
 const Home = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    // const fetcher = await fetch("http://localhost/ci-rest-jwt/api/layout", {
-    //   headers: {
-    //     'Content-Type' : 'application/json',
-    //     'Authorization':
-    //       "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjQiLCJ1c2VybmFtZSI6ImlraHNhbiIsImlhdCI6MTU5MTM2NzcxNSwiZXhwIjoxNTkxMzg1NzE1fQ._qPsRshDRmlBugjUNN_6bzsKvguHqlfqY1LqwsiGoUo",
-    //   }
-    // })
-    async function fetching(){
-      await axios.get('https://jsonplaceholder.typicode.com/posts')
-      .then(result => {
-        setData([result.data])
-      })
-    }
-    fetching()
-  },[]);
-  console.log(data)
+  const image = {
+    back:
+      "https://image.freepik.com/free-vector/gradient-geometric-shapes-dark-background_23-2148430351.jpg",
+  };
+  const classes = useStyles(image);
+  const { navitem } = useSelector((state) => state.layout.navbar);
+  const { layout_loading } = useSelector((state) => state.loading);
   return (
     <div>
+      <Helmet>
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta name='description' content='Service Center' />
+        <title>Makersware Service Center</title>
+        <link rel='stylesheet' href='/css/Home.css' />
+      </Helmet>
       <header className='header_area'>
         <div className='main_menu'>
           <nav className='navbar navbar-expand-lg navbar-light'>
             <div className='container box_1620'>
-              <a className='navbar-brand logo_h' href='index.html'>
+              <a
+                className='navbar-brand logo_h'
+                href='/'
+                className={classes.centerImage}>
                 <LazyLoadImage
                   effect='blur'
                   src='/assets/mwlogo.png'
                   alt='Logo'
-                  style={{ height: "50px", filter: "invert(100%)" }}
+                  className={classes.topimageheader}
                 />
               </a>
               <div
                 className='collapse navbar-collapse offset'
                 id='navbarSupportedContent'>
                 <ul className='nav navbar-nav menu_nav justify-content-end'>
-                  <li className='nav-item active'>
-                    <Link className='nav-link' to='/home'>
-                      Home
-                    </Link>
-                  </li>
-                  <li className='nav-item'>
-                    <Link className='nav-link' to='/track'>
-                      Track
-                    </Link>
-                  </li>
-                  <li className='nav-item'>
-                    <Link className='nav-link' to='/invoice'>
-                      Invoice
-                    </Link>
-                  </li>
-                  <li className='nav-item'>
-                    <Link className='nav-link' to='/information'>
-                      Informasi
-                    </Link>
-                  </li>
+                  <div className={classes.bordernav}>
+                    {layout_loading
+                      ? [1, 2, 3, 4].map((n) => {
+                          return (
+                            <li className='nav-item'>
+                              <Skeleton
+                                variant='rect'
+                                width={50}
+                                animation='wave'
+                              />
+                            </li>
+                          );
+                        })
+                      : navitem.map((n) => {
+                          return (
+                            <li className='nav-item'>
+                              <Link className='nav-link' to={n.to}>
+                                {n.label}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                  </div>
                 </ul>
               </div>
             </div>
@@ -122,7 +98,7 @@ const Home = () => {
         </div>
       </header>
       <main className='side-main'>
-        <section className='hero-banner mb-30px'>
+        <section className={`hero-banner mb-30px ${classes.herobanner}`}>
           <div className='container'>
             <div className='row'>
               <div className='col-lg-7'>
@@ -142,7 +118,7 @@ const Home = () => {
                   <p>Life is Your Choice</p>
                   <a
                     className='button bg'
-                    href='#'
+                    href='https://wa.me/6288210891684'
                     style={{ position: "relative", zIndex: "1" }}>
                     Booking Service
                   </a>
@@ -223,7 +199,7 @@ const Home = () => {
                     effect='blur'
                     className='img-fluid'
                     src='/assets/offer.png'
-                    alt=''
+                    alt='penawaran'
                   />
                 </div>
               </div>
@@ -252,9 +228,11 @@ const Home = () => {
                     Mumpung lagi #DiRumahAja kamu bisa nungguin barang kamu
                     tanpa COD, bisa pakai Gosend atau GrabExpress
                   </h5>
-                  <a className='button button-light' href='#'>
+                  <Link
+                    className='button button-light'
+                    to='/details/slug-details'>
                     Know More
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

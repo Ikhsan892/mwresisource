@@ -74,20 +74,6 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
     marginLeft: "auto",
   },
-  // header: {
-  //   display: 'flex',
-  //   alignItems: 'center',
-  //   height: 50,
-  //   paddingLeft: theme.spacing(4),
-  //   backgroundColor: theme.palette.background.default,
-  // },
-  // img: {
-  //   display: 'block',
-  //   width: 'auto',
-  //   height : '350px',
-  //   margin: '0 auto',
-  //   overflow: 'hidden',
-  // },
 }));
 
 function Testi() {

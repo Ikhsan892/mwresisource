@@ -1,17 +1,25 @@
-import React, {lazy, Suspense} from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import LinearProgress from '@material-ui/core/LinearProgress'
-import * as serviceWorker from './serviceWorker';
-const App  = lazy(() => import('./App'));
+import React, { lazy, Suspense } from "react";
+import { Provider } from "react-redux";
+import ReactDOM from "react-dom";
+import "./index.css";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import * as serviceWorker from "./serviceWorker";
+import store from "./store";
+const App = lazy(() => import("./App"));
 ReactDOM.render(
   <div>
-    <Suspense fallback={<div><LinearProgress/></div>}>
-      <App />
+    <Suspense
+      fallback={
+        <div>
+          <LinearProgress />
+        </div>
+      }>
+      <Provider store={store}>
+        <App />
+      </Provider>
     </Suspense>
-  </div>
-,
-  document.getElementById('root')
+  </div>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
