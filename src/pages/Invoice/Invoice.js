@@ -22,7 +22,8 @@ import {
   setResiDataToNotError,
   setFoundStateToFalse,
 } from "../../actions";
-
+const Carousel = lazy(() => import("components/Carousel"));
+const MCarousel = lazy(() => import("components/MCarousel"));
 const Result = lazy(() => import("./components/result"));
 const NoData = lazy(() => import("./components/nodata"));
 const useStyles = makeStyles((theme) => ({
@@ -114,11 +115,23 @@ const Invoice = ({ carousel, mcarousel }) => {
         <title>Makersware Service Center - Cari Invoice mu disini</title>
       </Helmet>
       <Hidden smUp>
-        <Suspense fallback={<div>Loading...</div>}>{mcarousel}</Suspense>
+        <div
+          style={{
+            marginTop: -100,
+          }}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <MCarousel />
+          </Suspense>
+        </div>
       </Hidden>
-      <Container>
+      <Container
+        style={{
+          paddingBottom: 200,
+        }}>
         <Hidden xsDown>
-          <Suspense fallback={<div>Loading...</div>}>{carousel}</Suspense>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Carousel />
+          </Suspense>
         </Hidden>
         <LazyLoadImage
           src='/assets/invoice.svg'

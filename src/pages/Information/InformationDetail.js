@@ -32,16 +32,10 @@ const useStyles = makeStyles((theme) => ({
     height: 140,
   },
   content: {
-    paddingTop: "100px",
-  },
-  imageHeader: {
-    width: "auto",
-    height: "400px",
-    objectFit: "contain",
-    display: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginBottom: "20px",
+    [theme.breakpoints.up("lg")]: {
+      paddingTop: "100px",
+    },
+    paddingBottom: 200,
   },
 }));
 const InformationDetail = () => {
@@ -119,9 +113,24 @@ const InformationDetail = () => {
             <div style={{ paddingTop: "400px" }} />
           </Skeleton>
         ) : status === 200 ? (
-          <img src={data.image_heading} className={classes.imageHeader} />
+          <div
+            style={{
+              width: "auto",
+              height: 400,
+              objectFit: "fill",
+              marginBottom: 70,
+            }}>
+            <img src={data.image_heading} className={classes.imageHeader} />
+          </div>
         ) : (
-          <img src='/assets/error.svg' className={classes.imageHeader} />
+          <div
+            style={{
+              width: "auto",
+              objectFit: "fill",
+              marginBottom: 70,
+            }}>
+            <img src='/assets/error.svg' className={classes.imageHeader} />
+          </div>
         )}
         {blogDetails_loading ? (
           range(0, 50).map((i) => {
@@ -134,13 +143,15 @@ const InformationDetail = () => {
             );
           })
         ) : status === 200 ? (
-          <Interwave
-            content={data.body}
-            hashtagUrl={(hashtag) =>
-              `https://www.instagram.com/explore/tags/${hashtag}`
-            }
-            matchers={[new UrlMatcher("url"), new HashtagMatcher("hashtag")]}
-          />
+          <Typography variant='body1'>
+            <Interwave
+              content={data.body}
+              hashtagUrl={(hashtag) =>
+                `https://www.instagram.com/explore/tags/${hashtag}`
+              }
+              matchers={[new UrlMatcher("url"), new HashtagMatcher("hashtag")]}
+            />
+          </Typography>
         ) : (
           ""
         )}

@@ -57,23 +57,42 @@ const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: "40px",
     maxWidth: "340px",
+    marginTop: 50,
     marginBottom: "50px",
+    margin: "0 auto",
+    boxShadow: "33px 33px 0px -15px #2196f3",
   },
   card: {
     paddingTop: "40px",
     maxWidth: "340px",
-    marginBottom: "50px",
   },
   center: {
     textAlign: "center",
   },
   avatar: {
-    marginBottom: "-40px",
     width: "100px",
     height: "100px",
     marginRight: "auto",
     marginLeft: "auto",
   },
+  // box: {
+  //   height: 200,
+  //   width: 200,
+  //   backgroundColor: theme.palette.primary.main,
+  //   position: "absolute",
+  //   zIndex: -0,
+  //   marginTop: -40,
+  //   marginLeft: -40,
+  // },
+  // box2: {
+  //   height: 200,
+  //   width: 200,
+  //   backgroundColor: theme.palette.primary.main,
+  //   position: "absolute",
+  //   zIndex: -0,
+  //   marginTop: 220,
+  //   marginLeft: 180,
+  // },
 }));
 
 function Testi() {
@@ -96,6 +115,8 @@ function Testi() {
 
   return (
     <div className={classes.root}>
+      {/* <div className={classes.box}></div>
+      <div className={classes.box2}></div> */}
       <AutoPlaySwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
@@ -105,8 +126,8 @@ function Testi() {
           <div key={step.avatar}>
             {Math.abs(activeStep - index) <= 2 ? (
               <div>
-                <Avatar className={classes.avatar}>{step.avatar}</Avatar>
                 <Card className={classes.card}>
+                  <Avatar className={classes.avatar}>{step.avatar}</Avatar>
                   <CardActionArea>
                     <CardContent>
                       <Typography
@@ -126,6 +147,7 @@ function Testi() {
                       </div>
                       <Typography
                         variant='body2'
+                        align='center'
                         color='textSecondary'
                         component='p'>
                         {step.komentar}
@@ -141,33 +163,41 @@ function Testi() {
           </div>
         ))}
       </AutoPlaySwipeableViews>
-      <MobileStepper
-        steps={maxSteps}
-        position='static'
-        variant='dots'
-        activeStep={activeStep}
-        nextButton={
-          <Button
-            size='small'
-            onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}>
-            {theme.direction === "rtl" ? (
-              <KeyboardArrowLeft />
-            ) : (
-              <KeyboardArrowRight />
-            )}
-          </Button>
-        }
-        backButton={
-          <Button size='small' onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === "rtl" ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
-          </Button>
-        }
-      />
+      <div
+        style={{
+          position: "relative",
+        }}>
+        <MobileStepper
+          steps={maxSteps}
+          position='static'
+          variant='dots'
+          activeStep={activeStep}
+          nextButton={
+            <Button
+              size='small'
+              onClick={handleNext}
+              disabled={activeStep === maxSteps - 1}>
+              {theme.direction === "rtl" ? (
+                <KeyboardArrowLeft />
+              ) : (
+                <KeyboardArrowRight />
+              )}
+            </Button>
+          }
+          backButton={
+            <Button
+              size='small'
+              onClick={handleBack}
+              disabled={activeStep === 0}>
+              {theme.direction === "rtl" ? (
+                <KeyboardArrowRight />
+              ) : (
+                <KeyboardArrowLeft />
+              )}
+            </Button>
+          }
+        />
+      </div>
     </div>
   );
 }

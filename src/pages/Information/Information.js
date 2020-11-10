@@ -23,6 +23,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlogData, getCategoryData } from "../../actions";
+const Carousel = lazy(() => import("components/Carousel"));
+const MCarousel = lazy(() => import("components/MCarousel"));
 const Pagination = lazy(() => import("./components/Pagination"));
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -98,18 +100,30 @@ const Information = ({ carousel, mcarousel }) => {
     return data.slice(offsetawal, offsetakhir);
   };
   return (
-    <div>
+    <div
+      style={{
+        paddingBottom: 200,
+      }}>
       <Helmet>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <meta name='description' content='Cari Informasi Disini' />
         <title>Makersware Service Center - Cari Informasi Disini</title>
       </Helmet>
       <Hidden smUp>
-        <Suspense fallback={<div>Loading...</div>}>{mcarousel}</Suspense>
+        <div
+          style={{
+            marginTop: -100,
+          }}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <MCarousel />
+          </Suspense>
+        </div>
       </Hidden>
       <Container>
         <Hidden xsDown>
-          <Suspense fallback={<div>Loading...</div>}>{carousel}</Suspense>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Carousel />
+          </Suspense>
         </Hidden>
         <LazyLoadImage
           src='/assets/informasi.svg'

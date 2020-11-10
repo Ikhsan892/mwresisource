@@ -20,6 +20,8 @@ import {
   setTrackDataToNotError,
   setFoundStateTrackToFalse,
 } from "../../actions";
+const Carousel = lazy(() => import("components/Carousel"));
+const MCarousel = lazy(() => import("components/MCarousel"));
 const Result = lazy(() => import("./components/result"));
 const NoData = lazy(() => import("./components/nodata"));
 const useStyles = makeStyles((theme) => ({
@@ -66,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
 function Alert(props) {
   return <MuiAlert elevation={6} variant='filled' {...props} />;
 }
-const Track = ({ carousel, mcarousel }) => {
+const Track = () => {
   const classes = useStyles();
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useDispatch();
@@ -85,7 +87,10 @@ const Track = ({ carousel, mcarousel }) => {
     dispatch(setFoundStateTrackToFalse());
   };
   return (
-    <div>
+    <div
+      style={{
+        paddingBottom: 200,
+      }}>
       <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity='error'>
           Data Tidak Ditemukan
@@ -110,11 +115,20 @@ const Track = ({ carousel, mcarousel }) => {
         </title>
       </Helmet>
       <Hidden smUp>
-        <Suspense fallback={<div>Loading...</div>}>{mcarousel}</Suspense>
+        <div
+          style={{
+            marginTop: -100,
+          }}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <MCarousel />
+          </Suspense>
+        </div>
       </Hidden>
       <Container>
         <Hidden xsDown>
-          <Suspense fallback={<div>Loading...</div>}>{carousel}</Suspense>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Carousel />
+          </Suspense>
         </Hidden>
         <LazyLoadImage
           src='/assets/track.svg'

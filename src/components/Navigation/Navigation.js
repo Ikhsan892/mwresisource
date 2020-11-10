@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Typography, Button, Hidden } from "@material-ui/core";
-import { Link, useLocation, useRouteMatch } from "react-router-dom";
+import clsx from "clsx";
+import MenuIcon from "@material-ui/icons/Menu";
+import { AppBar, Toolbar, IconButton, Hidden } from "@material-ui/core";
+import { useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Skeleton from "@material-ui/lab/Skeleton";
+import NavigationBottom from "components/NavigationBottom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    display: (props) => props.display,
+    borderBottom: "none",
+    backgroundColor: (props) => (props.onHome ? "#f2f2f2" : "#fff"),
+  },
+  navbar_img: {
+    width: 100,
+    filter: `invert(0%)`,
+    margin: "0 auto",
+    [theme.breakpoints.up("lg")]: {
+      width: 150,
+    },
   },
   mainbar: {
-    top: (props) => props.toponhome,
+    top: 0,
     [theme.breakpoints.down("xs")]: {
       top: (props) => props.top,
     },
@@ -24,7 +36,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("lg")]: {
+      display: "none",
+    },
   },
   title: {
     flexGrow: 1,
@@ -32,62 +46,112 @@ const useStyles = makeStyles((theme) => ({
   skeletonPadding: {
     marginRight: "20px",
   },
+  inline: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    [theme.breakpoints.up("lg")]: {
+      display: "inline-block",
+    },
+  },
+  links: {
+    fontSize: 19,
+    fontWeight: 300,
+    width: "10%",
+    marginRight: 70,
+    textAlign: "center",
+  },
+  links_hover: {
+    "&:hover": {
+      fontWeight: 700,
+      borderBottom: `2px solid ${theme.palette.primary.main}`,
+      textDecoration: "none",
+    },
+  },
+  selected_links: {
+    fontWeight: 900,
+    color: theme.palette.primary.main,
+    borderBottom: `2px solid ${theme.palette.primary.main}`,
+    "&:visited": {
+      textDecoration: "none",
+      color: theme.palette.primary.main,
+    },
+    "&:hover": {
+      textDecoration: "none",
+      color: theme.palette.primary.main,
+    },
+  },
+  alink: {
+    textDecoration: "none",
+    color: "#000",
+    "&:visited": {
+      textDecoration: "none",
+      color: "#000",
+    },
+    "&:hover": {
+      textDecoration: "none",
+      color: "#000",
+    },
+  },
 }));
 
-const Navigation = ({ children }) => {
+const Navigation = () => {
   let url = useLocation();
   const [topval, setTopval] = useState("-60px");
-  const [tophome, setTophome] = useState("-70px");
-  const [display, setDisplay] = useState("block");
-  const { title, navitem } = useSelector((state) => state.layout.navbar);
+  const [onHome, setOnHome] = useState(false);
+  const [open, setOpen] = useState(false);
+  const { navitem } = useSelector((state) => state.layout.navbar);
   const { layout_loading } = useSelector((state) => state.loading);
-  let match = useRouteMatch("/details/:slug");
+  const { dark } = useSelector((state) => state.dark);
   useEffect(() => {
+    if (url.pathname === "/home") {
+      setOnHome(true);
+      setTopval("0px");
+    } else {
+      setOnHome(false);
+      setTopval("-60px");
+      setOpen(false);
+    }
     window.onscroll = () => {
-      if (url.pathname === "/home") {
-        setTopval("-60px");
+      if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+      ) {
+        setTopval("0px");
       } else {
-        if (match) {
+        if (url.pathname === "/home") {
           setTopval("0px");
         } else {
-          if (
-            document.body.scrollTop > 20 ||
-            document.documentElement.scrollTop > 20
-          ) {
-            setTopval("0px");
-          } else {
-            setTopval("-60px");
-          }
+          setTopval("-60px");
+          setOpen(false);
         }
       }
     };
-    if (url.pathname === "/home") {
-      setTophome("-70px");
-      setTopval("-60px");
-      setDisplay("block");
-    } else if (url.pathname === "/preview") {
-      setDisplay("none");
-    } else {
-      if (match) {
-        setTopval("0px");
-      }
-      setDisplay("block");
-      setTophome("0px");
-    }
   }, [url]);
-  const props = { top: topval, toponhome: tophome, display: display };
+  const openNav = () => {
+    setOpen(!open);
+  };
+  const props = {
+    top: topval,
+    onHome: onHome,
+    invert: dark,
+  };
   const classes = useStyles(props);
   return (
     <div className={classes.root}>
-      <AppBar position='fixed' color='primary' className={classes.mainbar}>
+      <AppBar position='fixed' color='inherit' className={classes.mainbar}>
         <Toolbar>
-          <Typography variant='h6' className={classes.title}>
-            {layout_loading ? (
-              <Skeleton variant='rect' width={150} animation='wave' />
-            ) : (
-              title
-            )}
-          </Typography>
+          <div className={classes.inline}>
+            <img src='/assets/mwlogo.png' className={classes.navbar_img} />
+            <IconButton
+              aria-label='open drawer'
+              edge='start'
+              className={classes.menuButton}
+              onClick={openNav}>
+              <MenuIcon />
+            </IconButton>
+          </div>
           <Hidden smDown>
             {layout_loading
               ? [1, 2, 3, 4].map((n) => {
@@ -102,15 +166,35 @@ const Navigation = ({ children }) => {
                 })
               : navitem.map((n) => {
                   return (
-                    <Button color='inherit' component={Link} to={n.to}>
-                      {n.label}
-                    </Button>
+                    <div
+                      className={clsx(
+                        classes.links,
+                        n.label.toLowerCase() === url.pathname.substr(1)
+                          ? ""
+                          : classes.links_hover
+                      )}>
+                      <Link
+                        to={n.to}
+                        style={{
+                          textDecoration: "none",
+                        }}>
+                        <a
+                          className={
+                            n.label.toLowerCase() === url.pathname.substr(1)
+                              ? classes.selected_links
+                              : classes.alink
+                          }
+                          href='javascript:void(0)'>
+                          {n.label}
+                        </a>
+                      </Link>
+                    </div>
                   );
                 })}
           </Hidden>
-          {children}
         </Toolbar>
       </AppBar>
+      <NavigationBottom open={open} />
     </div>
   );
 };
