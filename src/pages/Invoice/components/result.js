@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -115,7 +115,7 @@ const Result = () => {
     pdf.save(`Invoice ${invoiceId}`);
     dispatch(notDownloadFile());
   };
-  React.useEffect(() => {
+  useEffect(() => {
     if (download === true) {
       const input = document.getElementById("invoice");
       renderToPdf(input);
@@ -133,8 +133,8 @@ const Result = () => {
       rupiah += separator + ribuan.join(".");
     }
 
-    rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
-    return prefix == undefined ? rupiah : rupiah ? "" + rupiah : "";
+    rupiah = split[1] !== undefined ? rupiah + "," + split[1] : rupiah;
+    return prefix === undefined ? rupiah : rupiah ? "" + rupiah : "";
   }
   return (
     <React.Fragment>

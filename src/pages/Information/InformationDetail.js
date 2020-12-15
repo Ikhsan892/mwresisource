@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 350,
     maxHeight: 350,
   },
+  imageHeader: {
+    width: "100%",
+  },
   media: {
     height: 140,
   },

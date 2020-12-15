@@ -11,12 +11,11 @@ import Fab from "@material-ui/core/Fab";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import FacebookIcon from "@material-ui/icons/Facebook";
-import { Link } from "react-router-dom";
 import PhoneIcon from "@material-ui/icons/Phone";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Helmet } from "react-helmet";
 import Testi from "./testi";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -406,8 +405,8 @@ const Benefits = ({ index, head, body, direction }) => {
 };
 const Home = () => {
   const classes = useStyles();
-  const { navitem } = useSelector((state) => state.layout.navbar);
-  const { layout_loading } = useSelector((state) => state.loading);
+  // const { navitem } = useSelector((state) => state.layout.navbar);
+  // const { layout_loading } = useSelector((state) => state.loading);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
   return (
@@ -469,6 +468,7 @@ const Home = () => {
             <img
               src='/assets/section1banner.jpg'
               className={classes.section1image}
+              alt='Hero Section'
             />
           </div>
         </section>
@@ -505,7 +505,7 @@ const Home = () => {
               classes.section2benefitsimage,
               classes.section2benefitschild
             )}>
-            <img src='/assets/mwlogo2.png' />
+            <img src='/assets/mwlogo2.png' alt='Logo Makersware' />
           </div>
           <div className={classes.section2benefitschild}>
             <Benefits
@@ -709,21 +709,21 @@ gadgetmu saat ini
           spacing={3}
           style={{ marginTop: 50 }}>
           <Grid item>
-            <a href='#'>
+            <a href='https://instagram.com/makerswareofficial' target='__blank'>
               <div className={classes.sosmed}>
                 <InstagramIcon color='inherit' />
               </div>
             </a>
           </Grid>
           <Grid item>
-            <a href='#'>
+            <a href='https://facebook.com' target='__blank'>
               <div className={classes.sosmed}>
                 <FacebookIcon color='inherit' />
               </div>
             </a>
           </Grid>
           <Grid item>
-            <a href='#'>
+            <a href='https://twitter.com' target='__blank'>
               <div className={classes.sosmed}>
                 <TwitterIcon color='inherit' />
               </div>

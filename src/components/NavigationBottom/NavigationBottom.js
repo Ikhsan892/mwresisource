@@ -61,16 +61,12 @@ const NavigationBottom = ({ open }) => {
     switch (url.pathname) {
       case "/home":
         return 0;
-        break;
       case "/track":
         return 1;
-        break;
       case "/invoice":
         return 2;
-        break;
       case "/blog":
         return 3;
-        break;
       default:
         return -1;
     }

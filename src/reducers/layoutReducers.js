@@ -73,7 +73,6 @@ export default function (state = initialState, action) {
       return {
         ...action.layout,
       };
-      break;
     default:
       return state;
   }

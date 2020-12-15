@@ -79,12 +79,12 @@ const Information = ({ carousel, mcarousel }) => {
   const [inputValue, setInputValue] = React.useState("");
   const [currentStep, setCurrentStep] = React.useState(0);
   const [selected, setSelected] = React.useState("");
-  const [postPerPage, setPostPerPage] = React.useState(6);
+  const [postPerPage] = React.useState(6);
   const handleCurrentPage = (value) => setCurrentStep(value - 1);
   useEffect(() => {
     dispatch(getBlogData());
     dispatch(getCategoryData());
-  }, []);
+  }, [dispatch]);
   const extractContent = (s) => {
     var span = document.createElement("span");
     span.innerHTML = s;
