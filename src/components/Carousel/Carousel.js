@@ -13,28 +13,13 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const tutorialSteps = [
   {
     label: "San Francisco – Oakland Bay Bridge, United States",
-    link: "https://instagram.com",
-    imgPath: "/assets/banner1.jpg",
+    link: "https://instagram.com/makersware",
+    imgPath: "/assets/new1.jpg",
   },
   {
     label: "Bird",
-    link: "http://localhost:3000/details/create-slug",
-    imgPath: "/assets/banner2.jpg",
-  },
-  {
-    label: "Bali, Indonesia",
-    link: "https://instagram.com",
-    imgPath: "/assets/banner3.jpg",
-  },
-  {
-    label: "NeONBRAND Digital Marketing, Las Vegas, United States",
-    link: "https://instagram.com",
-    imgPath: "/assets/banner4.jpg",
-  },
-  {
-    label: "Goč, Serbia",
-    link: "https://instagram.com",
-    imgPath: "/assets/banner5.jpg",
+    link: "https://instagram.com/makersware",
+    imgPath: "/assets/new2.jpg",
   },
 ];
 
@@ -51,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   img: {
-    height: "375px",
+    height: "500px",
+    objectFit: "cover",
     display: "block",
     maxWidth: "auto",
     marginLeft: "auto",
@@ -85,11 +71,12 @@ function Carousel() {
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
         onChangeIndex={handleStepChange}
-        enableMouseEvents>
+        enableMouseEvents
+      >
         {tutorialSteps.map((step, index) => (
           <div key={step.label}>
             {Math.abs(activeStep - index) <= 2 ? (
-              <a href={step.link} target='__blank' rel='noreferrer'>
+              <a href={step.link} target="__blank" rel="noreferrer">
                 <LazyLoadImage
                   className={classes.img}
                   src={step.imgPath}
@@ -102,14 +89,15 @@ function Carousel() {
       </AutoPlaySwipeableViews>
       <MobileStepper
         steps={maxSteps}
-        position='static'
-        variant='dots'
+        position="static"
+        variant="dots"
         activeStep={activeStep}
         nextButton={
           <Button
-            size='small'
+            size="small"
             onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}>
+            disabled={activeStep === maxSteps - 1}
+          >
             {theme.direction === "rtl" ? (
               <KeyboardArrowLeft />
             ) : (
@@ -118,7 +106,7 @@ function Carousel() {
           </Button>
         }
         backButton={
-          <Button size='small' onClick={handleBack} disabled={activeStep === 0}>
+          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
             {theme.direction === "rtl" ? (
               <KeyboardArrowRight />
             ) : (

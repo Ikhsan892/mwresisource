@@ -20,35 +20,32 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const tutorialSteps = [
   {
-    avatar: "I",
+    avatar: "L",
     rating: 4.5,
-    namapelanggan: "Fatihul Ikhsan",
+    namapelanggan: "Lukas",
     komentar:
       "Gk nyesel gw service disini soalnya banyak banget giveaway nya dari MW beeuuh makasih banyak dah",
-    barang: "Iphone 11 Pro",
+    barang: "Vivo Y15",
   },
   {
     avatar: "A",
     rating: 5.0,
     namapelanggan: "Alfin",
-    komentar:
-      "Gk nyesel gw service disini soalnya banyak banget giveaway nya dari MW beeuuh makasih banyak dah",
-    barang: "Iphone 11 ",
+    komentar: "Pelayanan Cepat dan harga murah!! Top",
+    barang: "Xiaomi Redmi 5A",
   },
   {
     avatar: "I",
     rating: 4.5,
     namapelanggan: "Intan",
-    komentar:
-      "Gk nyesel gw service disini soalnya banyak banget giveaway nya dari MW beeuuh makasih banyak dah",
+    komentar: "Banyak Hadiah Menarik Disini!",
     barang: "Oppo f5",
   },
   {
-    avatar: "J",
+    avatar: "A",
     rating: 5.0,
-    namapelanggan: "Jennie",
-    komentar:
-      "Gk nyesel gw service disini soalnya banyak banget giveaway nya dari MW beeuuh makasih banyak dah",
+    namapelanggan: "Ardi",
+    komentar: "Luar Biasa pelayanannya",
     barang: "Iphone 10 XS",
   },
 ];
@@ -114,7 +111,8 @@ function Testi() {
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
         onChangeIndex={handleStepChange}
-        enableMouseEvents>
+        enableMouseEvents
+      >
         {tutorialSteps.map((step, index) => (
           <div key={step.avatar}>
             {Math.abs(activeStep - index) <= 2 ? (
@@ -125,23 +123,25 @@ function Testi() {
                     <CardContent>
                       <Typography
                         gutterBottom
-                        variant='h5'
-                        component='h2'
-                        className={classes.center}>
+                        variant="h5"
+                        component="h2"
+                        className={classes.center}
+                      >
                         {step.namapelanggan}
                       </Typography>
                       <div className={classes.center}>
                         <Rating
-                          name='half-rating-read'
+                          name="half-rating-read"
                           defaultValue={step.rating}
                           precision={0.5}
                           readOnly
                         />
                       </div>
                       <Typography
-                        variant='body2'
-                        color='textSecondary'
-                        component='p'>
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                      >
                         {step.komentar}
                       </Typography>
                     </CardContent>
@@ -157,14 +157,15 @@ function Testi() {
       </AutoPlaySwipeableViews>
       <MobileStepper
         steps={maxSteps}
-        position='static'
-        variant='dots'
+        position="static"
+        variant="dots"
         activeStep={activeStep}
         nextButton={
           <Button
-            size='small'
+            size="small"
             onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}>
+            disabled={activeStep === maxSteps - 1}
+          >
             {theme.direction === "rtl" ? (
               <KeyboardArrowLeft />
             ) : (
@@ -173,7 +174,7 @@ function Testi() {
           </Button>
         }
         backButton={
-          <Button size='small' onClick={handleBack} disabled={activeStep === 0}>
+          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
             {theme.direction === "rtl" ? (
               <KeyboardArrowRight />
             ) : (
